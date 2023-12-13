@@ -1,0 +1,46 @@
+/* styles.css */
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+#aquarium {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: #87CEEB; /* Light blue for the water */
+}
+
+.fish {
+    position: absolute;
+    width: 129px; /* Set the width of your fish proportionate to the container size */
+    height: auto;
+    background-size: cover;
+}
+
+/* Style each fish individually */
+#fish1 {
+    background: url('../assets/Angel.GIF') no-repeat center center;
+}
+
+#fish2 {
+    background: url('../assets/Angler.GIF') no-repeat center center;
+}
+
+#fish3 {
+    background: url('../assets/Blue.GIF') no-repeat center center;
+}
+
+#fish4 {
+    background: url('../assets/Catfish.GIF') no-repeat center center;
+}
+
+/* Class for transition effect */
+.fish-moving {
+    transition: transform 2s linear;
+}
+
+/* Class for stopped fish */
+.fish.stopped {
+    transition: none;
+}
