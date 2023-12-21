@@ -16,6 +16,7 @@ body {
     width: 129px; /* Set the width of your fish proportionate to the container size */
     height: auto;
     background-size: cover;
+    opacity: 1;
 }
 
 /* Style each fish individually */
