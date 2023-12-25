@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     const aquarium = document.getElementById('aquarium');
 
     function updateAquariumDimensions() {
@@ -12,20 +12,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.addEventListener('resize', updateAquariumDimensions);
 
-    function addFish(imgSrc) {
-        const fish = document.createElement('div');
-        fish.className = 'fish';
-        aquarium.appendChild(fish);
+    // Manually input fish names
+    const manualFishNames = ['Angel.GIF', 'Angler.GIF', 'Catfish.GIF', 'Crab.GIF', 'Jelly.GIF', 'Lion.GIF', 'Puffer.GIF', 'Star.GIF']; // Add your own fish image names here
 
-        const img = document.createElement('img');
-        img.src = imgSrc;
-        img.alt = 'Fish';
-        img.className = 'fish';
-        img.classList.add('fish-moving');
+    async function addFishManually() {
+        const fishImages = manualFishNames.map(fileName => `assets/${fileName}`);
+        addFish(fishImages);
+    }
 
-        fish.appendChild(img);
+    function addFish(images) {
+        for (const imgSrc of images) {
+            const fish = document.createElement('div');
+            fish.className = 'fish';
+            aquarium.appendChild(fish);
 
-        moveFishRandomly(fish);
+            const img = document.createElement('img');
+            img.src = imgSrc;
+            img.alt = 'Fish';
+            img.className = 'fish';
+            img.classList.add('fish-moving');
+
+            fish.appendChild(img);
+
+            moveFishRandomly(fish);
+        }
     }
 
     function moveFishRandomly(element) {
@@ -52,9 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
         animateFish();
     }
 
-    // Create fish with different images
-    addFish('assets/Angel.GIF');
-    addFish('assets/Angler.GIF');
-    addFish('assets/Blue.GIF');
-    addFish('assets/Catfish.GIF');
+    // Add fish manually
+    addFishManually();
 });
