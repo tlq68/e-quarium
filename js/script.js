@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     window.addEventListener('resize', updateAquariumDimensions);
 
     // Manually input fish names
-    const manualFishNames = ['Angel.GIF', 'Angler.GIF', 'Catfish.GIF', 'Crab.GIF', 'Jelly.GIF', 'Lion.GIF', 'Puffer.GIF', 'Star.GIF']; // Add your own fish image names here
+    const manualFishNames = ['output-onlinegiftools.gif', 'output-onlinegiftools.gif', 'output-onlinegiftools.gif', 'output-onlinegiftools.gif', 'output-onlinegiftools.gif', 'output-onlinegiftools.gif', 'output-onlinegiftools.gif', 'output-onlinegiftools.gif', 'output-onlinegiftools.gif']; // Add your own fish image names here
 
     async function addFishManually() {
         const fishImages = manualFishNames.map(fileName => `assets/${fileName}`);
