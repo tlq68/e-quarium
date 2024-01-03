@@ -4,20 +4,28 @@ body {
     overflow: hidden;
 }
 
-#aquarium {
+#aquarium-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.aquarium-flex-container {
     position: relative;
     width: 100vw;
     height: 100vh;
     background-color: #87CEEB; /* Light blue for the water */
-    background-image: url('../assets/New\ Aquarium.GIF'); /* Updated file name and path */
-    background-size: contain; /* Adjust as needed */
+    background-image: url('../assets/New Aquarium.gif'); /* Updated file name and path */
+    background-size: cover; /* Adjust as needed */
     background-repeat: no-repeat;
     background-position: center center;
+    overflow: hidden; /* Ensure the aquarium container hides overflow */
 }
 
 .fish {
     position: absolute;
-    width: 129px; /* Set the width of your fish proportionate to the container size */
+    width: 129px;
     height: auto;
     background-size: cover;
     opacity: 1;
@@ -68,14 +76,4 @@ body {
 .kelp:nth-child(4) {
     top: 80%;
     left: 80%;
-}
-
-/* Class for transition effect */
-.fish-moving {
-    transition: transform 2s linear;
-}
-
-/* Class for stopped fish */
-.fish.stopped {
-    transition: none;
 }

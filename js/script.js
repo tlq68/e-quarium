@@ -15,15 +15,20 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Manually input fish names
     const manualFishNames = [
         'Algae-No-Background.gif', 
+        'Algae-No-Background.gif', 
         'Angel-No-Background.gif', 
-        'Angler-No-Background.gif', 
+        'Angel-No-Background.gif', 
+        'Catfish-No-Background.gif', 
         'Catfish-No-Background.gif', 
         'Crab-No-Background.gif', 
+        'Crab-No-Background.gif', 
+        'Jelly-No-Background.gif',
         'Jelly-No-Background.gif',
         'Lion-No-Background.gif',
+        'Lion-No-Background.gif',
         'Puffer-No-Background.gif',
-        'Star-No-Background.gif'
-    ]
+        'Puffer-No-Background.gif',
+    ];
 
     async function addFishManually() {
         const fishImages = manualFishNames.map(fileName => `assets/${fileName}`);
@@ -52,20 +57,40 @@ document.addEventListener('DOMContentLoaded', async function () {
         let isFishStopped = false;
 
         function getRandomPosition() {
-            const x = Math.random() * (aquariumWidth - element.clientWidth);
-            const y = Math.random() * (aquariumHeight - element.clientHeight);
+            const x = aquariumWidth; // Start from the right side
+            const y = Math.random() * aquariumHeight;
             return { x, y };
         }
+
+        // Set the initial position
+        const initialPosition = getRandomPosition();
+        element.style.transform = `translate(${initialPosition.x}px, ${initialPosition.y}px)`;
 
         function animateFish() {
             if (!isFishStopped) {
                 const newPosition = getRandomPosition();
                 element.classList.add('fish-moving');
-                element.style.transform = `translate(${newPosition.x}px, ${newPosition.y}px)`;
 
+                // Set up CSS animation for vertical floating and horizontal movement
+                element.style.animation = `
+                    fishFloat 4s infinite alternate,
+                    moveFish 8s linear
+                `; // Adjust the durations as needed
+
+                // Set up CSS animation for horizontal movement
+                element.style.transition = 'transform 8s linear'; // Adjust the duration as needed
+                element.style.transform = `translate(-${element.clientWidth}px, ${newPosition.y}px)`;
+
+                // Reset position for the next animation
                 setTimeout(() => {
-                    animateFish();
-                }, 2000);
+                    element.style.transition = 'none';
+                    element.style.transform = `translate(${aquariumWidth}px, ${newPosition.y}px)`;
+
+                    // Trigger next animation
+                    setTimeout(() => {
+                        animateFish();
+                    }, 1000); // Adjust the delay as needed
+                }, 8000); // Adjust the duration as needed
             }
         }
 
