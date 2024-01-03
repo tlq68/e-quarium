@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         function getRandomPosition() {
             const x = aquariumWidth; // Start from the right side
-            const y = Math.random() * aquariumHeight;
+            const y = Math.random() * (aquariumHeight - element.clientHeight);
             return { x, y };
         }
 
@@ -71,15 +71,16 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const newPosition = getRandomPosition();
                 element.classList.add('fish-moving');
 
-                // Set up CSS animation for vertical floating and horizontal movement
-                element.style.animation = `
-                    fishFloat 4s infinite alternate,
-                    moveFish 8s linear
-                `; // Adjust the durations as needed
+                // Set random delays for fish animations
+                const delayBeforeFloat = Math.random() * 3000; // 0 to 3 seconds
+                const delayBeforeMove = Math.random() * 3000; // 0 to 3 seconds
+
+                // Set up CSS animation for vertical floating
+                element.style.animation = `fishFloat 2s infinite alternate ${delayBeforeFloat}ms`;
 
                 // Set up CSS animation for horizontal movement
-                element.style.transition = 'transform 8s linear'; // Adjust the duration as needed
-                element.style.transform = `translate(-${element.clientWidth}px, ${newPosition.y}px)`;
+                element.style.transition = `transform 8s linear ${delayBeforeMove}ms`;
+                element.style.transform = `translate(-${aquariumWidth}px, ${newPosition.y}px)`;
 
                 // Reset position for the next animation
                 setTimeout(() => {
@@ -89,12 +90,15 @@ document.addEventListener('DOMContentLoaded', async function () {
                     // Trigger next animation
                     setTimeout(() => {
                         animateFish();
-                    }, 1000); // Adjust the delay as needed
-                }, 8000); // Adjust the duration as needed
+                    }, 3000); // Longer delay before starting the next animation
+                }, 12000); // Adjust the duration as needed
             }
         }
 
-        animateFish();
+        // Start the animation after a delay to create a staggered effect
+        setTimeout(() => {
+            animateFish();
+        }, Math.random() * 3000); // Adjust the delay as needed
     }
 
     // Add fish manually

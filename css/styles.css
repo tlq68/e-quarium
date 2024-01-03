@@ -30,6 +30,18 @@ body {
     background-size: cover;
     opacity: 1;
 }
+@keyframes fishAnimations {
+    0%, 100% {
+        transform: translateX(100%) translateY(0);
+    }
+    50% {
+        transform: translateX(0) translateY(10px);
+    }
+}
+
+.fish-moving {
+    animation: fishAnimations 8s infinite;
+}
 
 .castle {
     position: fixed;
