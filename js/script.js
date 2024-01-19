@@ -62,10 +62,10 @@ document.addEventListener('DOMContentLoaded', async function () {
         let isFishStopped = false;
 
         function getInitialPosition() {
-            const x = Math.random() * (aquariumWidth + element.clientWidth); // Randomize x position
+            const x = Math.random() * (aquariumWidth - element.clientWidth); // Adjusted to ensure the entire fish is within the aquarium
             const y = Math.random() * (aquariumHeight - element.clientHeight);
             return { x, y };
-        }
+        }        
         
         function getRandomPosition() {
             const x = Math.random() * (aquariumWidth + element.clientWidth); // Randomize x position
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 // Set random delays for fish animations
                 const delayBeforeFloat = Math.random() * 2000; // 0 to 2 seconds
                 const delayBeforeMove = Math.random() * 3000; // 0 to 3 seconds
-                const respawnDelay = Math.random() * 10000; // 0 to 10 seconds for respawn
+                const respawnDelay = Math.random() * 2000; // 0 to 10 seconds for respawn
                 
                 // Set up CSS animation for vertical floating
                 element.style.animation = `fishFloat 2s infinite alternate ${delayBeforeFloat}ms`;
@@ -93,9 +93,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                 // Set up CSS animation for horizontal movement
                 element.style.transition = `transform 8s linear ${delayBeforeMove}ms`;
 
-                // Calculate the end position based on the fish movement direction
-                const endX = (element.dataset.movementDirection === 'left') ? -element.clientWidth : aquariumWidth;
+                const distanceMultiplier = 1.3; // You can adjust this multiplier to control how far the fish move
+                const endX = (element.dataset.movementDirection === 'left') ? -aquariumWidth * distanceMultiplier : aquariumWidth * distanceMultiplier;
                 const endY = newPosition.y;
+
+
 
                 // Set the initial position
                 element.style.transform = `translate(${endX}px, ${endY}px)`;
@@ -120,7 +122,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     setTimeout(() => {
                         animateFish();
                     }, respawnDelay); // Random respawn delay
-                }, 8000); // Move off-screen duration
+                }, 15000); // Move off-screen duration
             }
         }
 
