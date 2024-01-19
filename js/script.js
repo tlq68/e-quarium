@@ -16,19 +16,19 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Manually input fish names
     const manualFishNames = [
         'Algae.gif', 
-        'Algae.gif', 
+        'Algae flip.gif', 
         'Angel.gif', 
-        'Angel.gif', 
+        'Angel flip.gif', 
         'Catfish.gif', 
-        'Catfish.gif', 
+        'Catfish flip.gif', 
         'Crab.gif', 
-        'Crab.gif', 
+        'Crab flip.gif', 
         'Jelly.gif',
         'Jelly.gif',
         'Lion.gif',
-        'Lion.gif',
+        'Lion flip.gif',
         'Puffer.gif',
-        'Puffer.gif',
+        'Puffer flip.gif',
     ];
 
     async function addFishManually() {
