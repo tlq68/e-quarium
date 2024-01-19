@@ -15,48 +15,50 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // Manually input fish names
     const manualFishNames = [
-        'Algae-No-Background.gif', 
-        'Algae-No-Background.gif', 
-        'Angel-No-Background.gif', 
-        'Angel-No-Background.gif', 
-        'Catfish-No-Background.gif', 
-        'Catfish-No-Background.gif', 
-        'Crab-No-Background.gif', 
-        'Crab-No-Background.gif', 
-        'Jelly-No-Background.gif',
-        'Jelly-No-Background.gif',
-        'Lion-No-Background.gif',
-        'Lion-No-Background.gif',
-        'Puffer-No-Background.gif',
-        'Puffer-No-Background.gif',
+        'Algae.gif', 
+        'Algae.gif', 
+        'Angel.gif', 
+        'Angel.gif', 
+        'Catfish.gif', 
+        'Catfish.gif', 
+        'Crab.gif', 
+        'Crab.gif', 
+        'Jelly.gif',
+        'Jelly.gif',
+        'Lion.gif',
+        'Lion.gif',
+        'Puffer.gif',
+        'Puffer.gif',
     ];
 
     async function addFishManually() {
         const fishImages = manualFishNames.map(fileName => `assets/${fileName}`);
         addFish(fishImages);
     }
-
+    
     function addFish(images) {
         for (const imgSrc of images) {
             const fish = document.createElement('div');
             fish.className = 'fish';
             fishContainer.appendChild(fish);
-
+    
             const img = document.createElement('img');
             img.src = imgSrc;
             img.alt = 'Fish';
             img.className = 'fish';
             img.classList.add('fish-moving');
-
+    
             // Determine the movement direction randomly
             const movementDirection = Math.random() > 0.5 ? 'left' : 'right';
             fish.dataset.movementDirection = movementDirection;
-
+    
             fish.appendChild(img);
-
+    
             moveFishRandomly(fish);
         }
     }
+    
+    
 
     function moveFishRandomly(element) {
         let isFishStopped = false;
@@ -93,11 +95,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                 // Set up CSS animation for horizontal movement
                 element.style.transition = `transform 8s linear ${delayBeforeMove}ms`;
 
-                const distanceMultiplier = 1.3; // You can adjust this multiplier to control how far the fish move
+                const distanceMultiplier = 1.3;
                 const endX = (element.dataset.movementDirection === 'left') ? -aquariumWidth * distanceMultiplier : aquariumWidth * distanceMultiplier;
                 const endY = newPosition.y;
-
-
 
                 // Set the initial position
                 element.style.transform = `translate(${endX}px, ${endY}px)`;
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 setTimeout(() => {
                     // Reset position for the next animation
                     element.style.transition = 'none';
-                    
+
                     if (element.dataset.movementDirection === 'left') {
                         // If left-going fish, become right-going fish
                         element.dataset.movementDirection = 'right';
