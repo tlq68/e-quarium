@@ -43,6 +43,10 @@ body {
     animation: fishAnimations 8s infinite;
 }
 
+.fish-flipped img {
+    transform: scaleX(-1);
+}
+
 .castle {
     position: fixed;
     width: 300px;
