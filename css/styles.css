@@ -121,22 +121,49 @@ body {
 
 /* Media Queries */
 
-/* Mobile */
-@media (max-width: 767px) {
+/* Extra Small Screens */
+@media (max-width: 479px) {
+    .aquarium-flex-container {
+        height: 150vh; /* Adjusted height for better visibility on extra small screens */
+    }
+
     .fish {
-        width: 80px; /* Adjust mobile fish width */
-        height: auto; /* Adjust mobile fish height */
+        width: 60px; /* Adjusted fish width for extra small screens */
+        height: auto;
     }
 
     .castle {
-        width: 200px; /* Adjust mobile castle width */
-        height: auto; /* Adjust mobile castle height */
+        width: 150px; /* Adjusted castle width for extra small screens */
+        height: auto;
     }
 
     .kelp {
-        width: 30px; /* Adjust mobile kelp width */
-        height: auto; /* Adjust mobile kelp height */
+        width: 20px; /* Adjusted kelp width for extra small screens */
+        height: auto;
     }
+}
+
+/* Mobile */
+@media (min-width: 480px) and (max-width: 767px) {
+    .aquarium-flex-container {
+        height: 120vh; /* Adjusted height for better visibility on mobile */
+    }
+
+    .fish {
+        width: 80px;
+        height: auto;
+    }
+
+    .castle {
+        width: 200px;
+        height: auto;
+    }
+
+    .kelp {
+        width: 30px;
+        height: auto;
+    }
+
 }
 
 /* Tablets */
