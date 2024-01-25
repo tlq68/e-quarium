@@ -16,7 +16,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: #87CEEB; /* Light blue for the water */
-    background-image: url('../assets/New%20Aquarium.gif'); /* Updated file name and path */
+    background-image: url('../assets/New Aquarium.gif'); /* Updated file name and path */
     background-size: cover; /* Adjust as needed */
     background-repeat: no-repeat;
     background-position: center center;
