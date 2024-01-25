@@ -2,25 +2,29 @@
 body {
     margin: 0;
     overflow: hidden;
+    padding: 0;
 }
 
 #aquarium-container {
     display: flex;
-    align-items: center;
+    align-items: flex-end; /* Align items to the bottom */
     justify-content: center;
     height: 100vh;
+    margin: 0;
 }
 
 .aquarium-flex-container {
     position: relative;
     width: 100vw;
     height: 100vh;
-    background-color: #87CEEB; /* Light blue for the water */
-    background-image: url('../assets/New-Aquarium.gif'); /* Updated file name and path */
-    background-size: cover; /* Adjust as needed */
+    background-color: #87CEEB;
+    background-image: url('../assets/New-Aquarium.gif');
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    overflow: hidden; /* Ensure the aquarium container hides overflow */
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 .fish {
@@ -48,18 +52,19 @@ body {
 }
 
 .castle {
-    position: fixed;
-    width: 300px;
+    position: absolute;
     height: auto;
+    bottom: 0;
+    margin: 0;
 }
 
 .castle img {
     width: 100%;
     height: auto;
+    display: block;
 }
 
 .castle:nth-child(1) {
-    top: 50%;
     left: 10%;
 }
 
@@ -92,4 +97,96 @@ body {
 .kelp:nth-child(4) {
     top: 80%;
     left: 80%;
+}
+
+/* Media Queries */
+
+/* Mobile */
+@media (max-width: 767px) {
+    .fish {
+        width: 80px; /* Adjust mobile fish width */
+        height: auto; /* Adjust mobile fish height */
+    }
+
+    .castle {
+        width: 200px; /* Adjust mobile castle width */
+        height: auto; /* Adjust mobile castle height */
+    }
+
+    .kelp {
+        width: 30px; /* Adjust mobile kelp width */
+        height: auto; /* Adjust mobile kelp height */
+    }
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .fish {
+        width: 100px; /* Adjust tablet fish width */
+        height: auto; /* Adjust tablet fish height */
+    }
+
+    .castle {
+        width: 250px; /* Adjust tablet castle width */
+        height: auto; /* Adjust tablet castle height */
+    }
+
+    .kelp {
+        width: 40px; /* Adjust tablet kelp width */
+        height: auto; /* Adjust tablet kelp height */
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .fish {
+        width: 129px; /* Default desktop fish width */
+        height: auto; /* Default desktop fish height */
+    }
+
+    .castle {
+        width: 300px; /* Default desktop castle width */
+        height: auto; /* Default desktop castle height */
+    }
+
+    .kelp {
+        width: 50px; /* Default desktop kelp width */
+        height: auto; /* Default desktop kelp height */
+    }
+}
+
+/* Larger Screens */
+@media (min-width: 1440px) and (max-width: 1919px) {
+    .fish {
+        width: 150px; /* Adjust larger screens fish width */
+        height: auto; /* Adjust larger screens fish height */
+    }
+
+    .castle {
+        width: 350px; /* Adjust larger screens castle width */
+        height: auto; /* Adjust larger screens castle height */
+    }
+
+    .kelp {
+        width: 60px; /* Adjust larger screens kelp width */
+        height: auto; /* Adjust larger screens kelp height */
+    }
+}
+
+/* Extra Large Screens */
+@media (min-width: 1920px) {
+    .fish {
+        width: 180px; /* Adjust extra large screens fish width */
+        height: auto; /* Adjust extra large screens fish height */
+    }
+
+    .castle {
+        width: 400px; /* Adjust extra large screens castle width */
+        height: auto; /* Adjust extra large screens castle height */
+    }
+
+    .kelp {
+        width: 70px; /* Adjust extra large screens kelp width */
+        height: auto; /* Adjust extra large screens kelp height */
+    }
 }
