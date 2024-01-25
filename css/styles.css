@@ -129,18 +129,16 @@ body {
     }
 
     .fish {
-        width: 60px; /* Adjusted fish width for extra small screens */
+        width: 100px; /* Adjusted fish width for extra small screens */
         height: auto;
     }
 
     .castle {
-        width: 150px; /* Adjusted castle width for extra small screens */
-        height: auto;
+        display: none;
     }
 
     .kelp {
-        width: 20px; /* Adjusted kelp width for extra small screens */
-        height: auto;
+        display: none;
     }
 }
 
@@ -151,7 +149,7 @@ body {
     }
 
     .fish {
-        width: 80px;
+        width: 110px;
         height: auto;
     }
 
@@ -170,7 +168,7 @@ body {
 /* Tablets */
 @media (min-width: 768px) and (max-width: 1023px) {
     .fish {
-        width: 100px; /* Adjust tablet fish width */
+        width: 120px; /* Adjust tablet fish width */
         height: auto; /* Adjust tablet fish height */
     }
 
@@ -188,7 +186,7 @@ body {
 /* Desktop */
 @media (min-width: 1024px) and (max-width: 1439px) {
     .fish {
-        width: 129px; /* Default desktop fish width */
+        width: 135px; /* Default desktop fish width */
         height: auto; /* Default desktop fish height */
     }
 
