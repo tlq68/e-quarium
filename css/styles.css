@@ -88,7 +88,12 @@ body {
 
 #kelp2 {
     bottom: 0%;
-    right: 0%;
+    left: 15%;
+}
+
+#kelp2 img {
+    height: auto;
+    width: 200%;
 }
 
 #kelp3 {
@@ -98,18 +103,21 @@ body {
 
 #kelp4 {
     bottom: 0%;
-    left: 80%;
+    right: 15%;
+}
+
+#kelp4 img {
+    height: auto;
+    width: 65%;
 }
 
 #kelp5 {
     bottom: 0%;
-    left: 15%;
+    right: 0%;
 }
 
-#kelp5 img {
-    height: auto;
-    width: 200%;
-}
+
+
 
 /* Media Queries */
 
