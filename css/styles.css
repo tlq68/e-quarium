@@ -69,34 +69,46 @@ body {
 }
 
 .kelp {
-    position: fixed;
+    position: absolute;
     width: 50px; /* Adjust the width of your kelp */
     height: auto;
+    display: block;
 }
 
 .kelp img {
     width: 100%; /* Make sure the image fills the container */
     height: auto;
+    display: block;
 }
 
-.kelp:nth-child(1) {
-    top: 20%;
-    left: 10%;
+#kelp1 {
+    bottom: 0%;
+    left: 0%;
 }
 
-.kelp:nth-child(2) {
-    top: 70%;
-    left: 60%;
+#kelp2 {
+    bottom: 0%;
+    right: 0%;
 }
 
-.kelp:nth-child(3) {
-    top: 40%;
-    left: 30%;
+#kelp3 {
+    bottom: 0%;
+    left: 40%;
 }
 
-.kelp:nth-child(4) {
-    top: 80%;
+#kelp4 {
+    bottom: 0%;
     left: 80%;
+}
+
+#kelp5 {
+    bottom: 0%;
+    left: 15%;
+}
+
+#kelp5 img {
+    height: auto;
+    width: 200%;
 }
 
 /* Media Queries */
