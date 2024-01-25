@@ -124,30 +124,24 @@ body {
 
 /* Extra Small Screens */
 @media (max-width: 479px) {
-    .aquarium-flex-container {
-        height: 150vh; /* Adjusted height for better visibility on extra small screens */
-    }
-
     .fish {
         width: 100px; /* Adjusted fish width for extra small screens */
         height: auto;
     }
 
     .castle {
-        display: none;
+        width: 150px;
+        height: auto;
     }
 
     .kelp {
-        display: none;
+        width: 20px;
+        height: auto;
     }
 }
 
 /* Mobile */
 @media (min-width: 480px) and (max-width: 767px) {
-    .aquarium-flex-container {
-        height: 120vh; /* Adjusted height for better visibility on mobile */
-    }
-
     .fish {
         width: 110px;
         height: auto;
