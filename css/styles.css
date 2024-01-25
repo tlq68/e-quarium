@@ -125,8 +125,15 @@ body {
 /* Extra Small Screens */
 @media (max-width: 479px) {
     .aquarium-flex-container {
-        overflow: visible;
+        overflow: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
+    
+    .aquarium-flex-container::-webkit-scrollbar {
+        display: none;
+    }
+
     .fish {
         width: 100px; /* Adjusted fish width for extra small screens */
         height: auto;
