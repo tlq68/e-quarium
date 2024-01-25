@@ -124,6 +124,9 @@ body {
 
 /* Extra Small Screens */
 @media (max-width: 479px) {
+    .aquarium-flex-container {
+        overflow: visible;
+    }
     .fish {
         width: 100px; /* Adjusted fish width for extra small screens */
         height: auto;
