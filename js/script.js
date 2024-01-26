@@ -87,6 +87,28 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
 
+    function addStationaryStar() {
+        const star = document.createElement('div');
+        star.className = 'stationary-star';
+        fishContainer.appendChild(star);
+
+        const img = document.createElement('img');
+        img.src = 'assets/Star.gif'; // Replace with the actual path to the Star.gif image
+        img.alt = 'Star';
+        img.className = 'stationary-star-img';
+
+        // Set fixed position for the star
+        const starPosition = { x: 100, y: 100 }; // Adjust these values as needed
+        star.style.position = 'absolute';
+        star.style.left = `${starPosition.x}px`;
+        star.style.top = `${starPosition.y}px`;
+
+        // Set z-index for the star
+        star.style.zIndex = '11';
+
+        star.appendChild(img);
+    }
+
     function moveFishRandomly(element) {
         let isFishStopped = false;
 
@@ -219,4 +241,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // Add regular fish and bottom-gliding fish manually
     addFishManually();
+
+    //Add Stationary Starfish
+    addStationaryStar();
 });

@@ -49,6 +49,19 @@ body {
     height: auto;
 }
 
+.bottom-gliding-fish {
+    position: absolute;
+    width: 50px;
+    height: auto;
+    background-size: cover;
+    opacity: 1;
+}
+
+.stationary-star-img {
+    position: absolute;
+    width: 50px;
+}
+
 @keyframes fishAnimations {
     0%, 100% {
         transform: translateX(100%) translateY(0);
