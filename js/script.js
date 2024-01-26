@@ -1,3 +1,8 @@
+document.addEventListener('DOMContentLoaded', function () {
+    const audio = document.getElementById('backgroundAudio');
+    audio.volume = 0.3; // Set the volume to 30%
+});
+
 document.addEventListener('DOMContentLoaded', async function () {
     const aquarium = document.getElementById('aquarium');
     const fishContainer = document.getElementById('fish-container');
