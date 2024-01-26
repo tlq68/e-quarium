@@ -40,8 +40,11 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     function addFishManually() {
         const fishImages = manualFishNames.map(fileName => `assets/${fileName}`);
-        addFish(fishImages);
-        addBottomGlidingFish(bottomGlidingFish);
+        for (const imgSrc of fishImages) {
+            setTimeout(() => {
+                addFish([imgSrc]);
+            }, Math.random() * 5000); // Adjust the time interval (in milliseconds) based on your preference
+        }
     }
 
     function addFish(images) {
@@ -63,6 +66,14 @@ document.addEventListener('DOMContentLoaded', async function () {
             fish.appendChild(img);
 
             moveFishRandomly(fish);
+        }
+    }
+
+    function addBottomGlidingFishManually() {
+        for (const imgSrc of bottomGlidingFish) {
+            setTimeout(() => {
+                addBottomGlidingFish([`assets/${imgSrc}`]);
+            }, Math.random() * 5000); // Adjust the time interval (in milliseconds) based on your preference
         }
     }
 
@@ -114,7 +125,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const y = Math.random() * (aquariumHeight - 50); // Adjusted to stay within the aquarium height
         return { x, y };
     }
-    
+
     function moveFishRandomly(element) {
         let isFishStopped = false;
 
@@ -140,11 +151,12 @@ document.addEventListener('DOMContentLoaded', async function () {
 
                 const delayBeforeFloat = Math.random() * 2000;
                 const delayBeforeMove = Math.random() * 3000;
-                const respawnDelay = Math.random() * 2000;
+                const respawnDelay = Math.random() * 5000;
 
-                element.style.animation = `fishFloat 2s infinite alternate ${delayBeforeFloat}ms`;
-                element.style.transition = `transform 8s linear ${delayBeforeMove}ms`;
+                const aquariumWidthFactor = aquariumWidth / 500; // Adjust this factor based on your preference
 
+        element.style.animation = `fishFloat ${2 * aquariumWidthFactor}s infinite alternate ${delayBeforeFloat}ms`;
+        element.style.transition = `transform ${8 * aquariumWidthFactor}s linear ${delayBeforeMove}ms`;
                 const distanceMultiplier = 1.3;
                 const endX = (element.dataset.movementDirection === 'left') ? -element.clientWidth * 2 : aquariumWidth + element.clientWidth;
                 const endY = newPosition.y;
@@ -247,6 +259,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // Add regular fish and bottom-gliding fish manually
     addFishManually();
+    addBottomGlidingFishManually();
 
     //Add Stationary Starfish
     addStationaryStar();
