@@ -153,50 +153,50 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     function moveBottomGlidingFish(element) {
         let isFishStopped = false;
-
+    
         function getInitialPosition() {
             const x = (element.dataset.movementDirection === 'left') ? aquariumWidth + element.clientWidth : -element.clientWidth * 2;
-            const y = aquariumHeight - element.clientHeight; // Fix the y position to be at the bottom
+            const y = aquariumHeight - element.clientHeight + 20; // Adjusted to start at the bottom
             return { x, y };
         }
-
+    
         function getRandomPosition() {
             const x = Math.random() * (aquariumWidth + element.clientWidth);
-            const y = aquariumHeight - element.clientHeight; // Fix the y position to be at the bottom
+            const y = aquariumHeight - element.clientHeight; // Adjusted to stay at the bottom
             return { x, y };
         }
-
+    
         const initialPosition = getInitialPosition();
         element.style.transform = `translate(${initialPosition.x}px, ${initialPosition.y}px)`;
-
+    
         function animateBottomGlidingFish() {
             if (!isFishStopped) {
                 const newPosition = getRandomPosition();
-
+        
                 const delayBeforeMove = Math.random() * 3000;
                 const respawnDelay = Math.random() * 2000;
-
+        
                 element.style.transition = `transform 8s linear ${delayBeforeMove}ms`;
-
+        
                 const distanceMultiplier = 1.3;
                 const endX = (element.dataset.movementDirection === 'left') ? -element.clientWidth * 2 : aquariumWidth + element.clientWidth;
-                const endY = newPosition.y;
-
+                const endY = initialPosition.y; // Set endY to the initial Y position
+        
                 element.style.transform = `translate(${endX}px, ${endY}px)`;
-
+        
                 element.addEventListener('transitionend', function handleTransitionEnd(event) {
                     if (event.propertyName === 'transform') {
                         element.style.transition = 'none';
-
+        
                         // Flip the fish if it reaches the end of the aquarium
                         if (element.dataset.movementDirection === 'left' && endX <= -element.clientWidth * 2) {
                             element.dataset.movementDirection = 'right';
                         } else if (element.dataset.movementDirection === 'right' && endX >= aquariumWidth + element.clientWidth) {
                             element.dataset.movementDirection = 'left';
                         }
-
+        
                         element.style.transform = `translate(${endX}px, ${endY}px)`;
-
+        
                         setTimeout(() => {
                             element.removeEventListener('transitionend', handleTransitionEnd);
                             fishContainer.removeChild(element);
