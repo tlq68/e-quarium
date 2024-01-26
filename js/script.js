@@ -1,6 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
     const audio = document.getElementById('backgroundAudio');
-    audio.volume = 0.3; // Set the volume to 30%
+
+    // Set the volume to 30%
+    audio.volume = 0.3;
+
+    // Add an event listener to play the audio once it's loaded enough
+    audio.addEventListener('canplaythrough', function () {
+        // Check if the audio is not already playing
+        if (audio.paused) {
+            // Start playing the audio
+            audio.play();
+        }
+    });
+
+    // Optional: Add an event listener for handling errors
+    audio.addEventListener('error', function (event) {
+        console.error('Error loading the audio:', event);
+    });
 });
 
 document.addEventListener('DOMContentLoaded', async function () {
