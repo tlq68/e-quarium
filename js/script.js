@@ -4,18 +4,21 @@ document.addEventListener('DOMContentLoaded', function () {
     // Set the volume to 30%
     audio.volume = 0.3;
 
-    // Add an event listener to play the audio once it's loaded enough
-    audio.addEventListener('canplaythrough', function () {
-        // Check if the audio is not already playing
-        if (audio.paused) {
-            // Start playing the audio
-            audio.play();
-        }
+    // Add an event listener to play the audio on user interaction
+    document.addEventListener('click', function playAudioOnInteraction() {
+        // Remove the click event listener to ensure the audio doesn't play on subsequent clicks
+        document.removeEventListener('click', playAudioOnInteraction);
+
+        // Start playing the audio
+        audio.play().catch(error => {
+            // Handle any errors that might occur during playback
+            console.error('Error playing the audio:', error);
+        });
     });
 
-    // Optional: Add an event listener for handling errors
+    // Optional: Add an event listener for handling errors during playback
     audio.addEventListener('error', function (event) {
-        console.error('Error loading the audio:', event);
+        console.error('Error during audio playback:', event);
     });
 });
 
