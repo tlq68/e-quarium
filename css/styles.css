@@ -35,6 +35,20 @@ body {
     background-size: cover;
     opacity: 1;
 }
+
+.bottom-gliding-fish {
+    position: absolute;
+    width: 50px;
+    height: auto;
+    background-size: cover;
+    opacity: 1;
+}
+
+.bottom-gliding-fish-img {
+    width: 150px;
+    height: auto;
+}
+
 @keyframes fishAnimations {
     0%, 100% {
         transform: translateX(100%) translateY(0);
@@ -117,9 +131,6 @@ body {
     right: 0%;
 }
 
-
-
-
 /* Media Queries */
 
 /* Extra Small Screens */
@@ -129,7 +140,7 @@ body {
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
-    
+
     .aquarium-flex-container::-webkit-scrollbar {
         display: none;
     }
