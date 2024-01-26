@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         'Angler.gif',
         'Angler flip.gif',
         'Blue.gif',
+        'Blue.gif',
         'Blue flip.gif',
         'Catfish.gif',
         'Catfish flip.gif',
@@ -30,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         'Lion.gif',
         'Lion flip.gif',
         'Puffer.gif',
-        'Puffer flip.gif',
+        'Puffer flip.gif'
     ];
 
     const bottomGlidingFish = [
@@ -43,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         for (const imgSrc of fishImages) {
             setTimeout(() => {
                 addFish([imgSrc]);
-            }, Math.random() * 5000); // Adjust the time interval (in milliseconds) based on your preference
+            }, Math.random() * 15000); // Adjust the time interval (in milliseconds) based on your preference
         }
     }
 
@@ -214,7 +215,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const newPosition = getRandomPosition();
         
                 const delayBeforeMove = Math.random() * 3000;
-                const respawnDelay = Math.random() * 2000;
+                const respawnDelay = Math.random() * 7000;
         
                 element.style.transition = `transform 8s linear ${delayBeforeMove}ms`;
         
