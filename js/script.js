@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         'Catfish.gif',
         'Catfish flip.gif',
         'Jelly.gif',
-        'Jelly flipped.gif',
+        'Jelly flip.gif',
         'Lion.gif',
         'Lion flip.gif',
         'Puffer.gif',
