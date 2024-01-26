@@ -97,8 +97,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         img.alt = 'Star';
         img.className = 'stationary-star-img';
 
-        // Set fixed position for the star
-        const starPosition = { x: 100, y: 100 }; // Adjust these values as needed
+        // Set random position for the star
+        const starPosition = getRandomStarPosition();
         star.style.position = 'absolute';
         star.style.left = `${starPosition.x}px`;
         star.style.top = `${starPosition.y}px`;
@@ -109,6 +109,12 @@ document.addEventListener('DOMContentLoaded', async function () {
         star.appendChild(img);
     }
 
+    function getRandomStarPosition() {
+        const x = Math.random() * (aquariumWidth - 50); // Adjusted to stay within the aquarium width
+        const y = Math.random() * (aquariumHeight - 50); // Adjusted to stay within the aquarium height
+        return { x, y };
+    }
+    
     function moveFishRandomly(element) {
         let isFishStopped = false;
 
