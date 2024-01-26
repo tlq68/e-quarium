@@ -11,18 +11,23 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error playing the audio:', error);
         });
 
-        // Remove the event listener after the first user interaction
+        // Remove the event listeners after the first user interaction
         document.removeEventListener('click', playAudioOnUserGesture);
+        document.removeEventListener('touchstart', playAudioOnUserGesture);
     }
 
-    // Add an event listener to play the audio on the first user interaction
+    // Add event listeners to play the audio on user interaction
     document.addEventListener('click', playAudioOnUserGesture);
+    document.addEventListener('touchstart', playAudioOnUserGesture);
 
     // Optional: Add an event listener for handling errors during playback
     audio.addEventListener('error', function (event) {
         console.error('Error during audio playback:', event);
     });
 });
+
+// Rest of your existing code...
+
 
     document.addEventListener('click', playAudioOnFirstClick);
 
