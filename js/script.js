@@ -1,10 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const audio = document.getElementById('backgroundAudio');
-    
-    if (audio) {
-        // Ensure the audio element exists before attempting to modify it
-        audio.volume = 0.3; // Set the volume to 50%
-    }
+    audio.volume = 0.3; // Set the volume to 30%
 });
 
 document.addEventListener('DOMContentLoaded', async function () {
