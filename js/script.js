@@ -4,23 +4,26 @@ document.addEventListener('DOMContentLoaded', function () {
     // Set the volume to 30%
     audio.volume = 0.3;
 
-    // Add an event listener to play the audio on user interaction
-    document.addEventListener('click', function playAudioOnInteraction() {
+    // Add a one-time click event listener to play the audio
+    function playAudioOnFirstClick() {
         // Remove the click event listener to ensure the audio doesn't play on subsequent clicks
-        document.removeEventListener('click', playAudioOnInteraction);
+        document.removeEventListener('click', playAudioOnFirstClick);
 
         // Start playing the audio
         audio.play().catch(error => {
             // Handle any errors that might occur during playback
             console.error('Error playing the audio:', error);
         });
-    });
+    }
+
+    document.addEventListener('click', playAudioOnFirstClick);
 
     // Optional: Add an event listener for handling errors during playback
     audio.addEventListener('error', function (event) {
         console.error('Error during audio playback:', event);
     });
 });
+
 
 document.addEventListener('DOMContentLoaded', async function () {
     const aquarium = document.getElementById('aquarium');
