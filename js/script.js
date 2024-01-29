@@ -1,42 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const audio = document.getElementById('backgroundAudio');
-
-    // Set the volume to 30%
-    audio.volume = 0.3;
-
-    function playAudioOnUserGesture() {
-        // Start playing the audio
-        audio.play().catch(error => {
-            // Handle any errors that might occur during playback
-            console.error('Error playing the audio:', error);
-        });
-
-        // Remove the event listeners after the first user interaction
-        document.removeEventListener('click', playAudioOnUserGesture);
-        document.removeEventListener('touchstart', playAudioOnUserGesture);
-    }
-
-    // Add event listeners to play the audio on user interaction
-    document.addEventListener('click', playAudioOnUserGesture);
-    document.addEventListener('touchstart', playAudioOnUserGesture);
-
-    // Optional: Add an event listener for handling errors during playback
-    audio.addEventListener('error', function (event) {
-        console.error('Error during audio playback:', event);
-    });
+    audio.volume = 0.3; // Set the volume to 30%
 });
-
-// Rest of your existing code...
-
-
-    document.addEventListener('click', playAudioOnFirstClick);
-
-    // Optional: Add an event listener for handling errors during playback
-    audio.addEventListener('error', function (event) {
-        console.error('Error during audio playback:', event);
-    });
-});
-
 
 document.addEventListener('DOMContentLoaded', async function () {
     const aquarium = document.getElementById('aquarium');
