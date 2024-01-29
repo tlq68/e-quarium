@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
         'Angler.gif',
         'Angler flip.gif',
         'Blue.gif',
-        'Blue.gif',
         'Blue flip.gif',
         'Catfish.gif',
         'Catfish flip.gif',
@@ -37,9 +36,9 @@ document.addEventListener('DOMContentLoaded', function () {
         'Puffer flip.gif'
     ];
 
-    manualFishNames.forEach(function (fishName) {
-        // Only include fish names that do not end with 'flip.gif'
-        if (!fishName.endsWith('flip.gif')) {
+    manualFishNames
+        .filter(fishName => !fishName.endsWith('flip.gif'))
+        .forEach(function (fishName) {
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.className = 'fish-checkbox';
@@ -48,11 +47,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const label = document.createElement('label');
             label.appendChild(checkbox);
-            label.appendChild(document.createTextNode(fishName.replace('.gif', ''))); // Remove '.gif' from the label
+
+            // Create a small image of the fish for the label
+            const fishImage = document.createElement('img');
+            fishImage.src = `assets/${fishName}`;
+            fishImage.alt = fishName.replace('.gif', ''); // Alt text without '.gif'
+            label.appendChild(fishImage);
 
             checkboxesContainer.appendChild(label);
-        }
-    });
+        });
 
     // Handle checkbox change event
     checkboxesContainer.addEventListener('change', function (event) {

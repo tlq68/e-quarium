@@ -1,26 +1,49 @@
 /* dropdown.css */
-#fish-dropdown {
-    margin: 10px;
-}
 
-#fish-dropdown-btn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-#fish-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+/* Add this style to arrange the fish checkboxes in a grid */
+#checkboxes-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
+    gap: 10px; /* Adjust the gap between checkboxes as needed */
+    margin-top: 65%; /* Add margin to create space between checkboxes and top bar */
+    background-color: rgba(25, 25, 25, .2);
 }
 
 .fish-checkbox {
-    margin: 5px;
+    display: none; /* Hide the default checkbox */
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid transparent; /* Add a border to indicate selection */
+    padding: 5px;
+    cursor: pointer;
+}
+
+label:hover {
+    border-color: #aaa; /* Change border color on hover */
+}
+
+.fish-checkbox:checked + label {
+    border-color: #00f; /* Change border color when checkbox is checked */
+}
+
+label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+label img {
+    width: 30px; /* Adjust the width of the fish image */
+    height: auto;
+    margin-right: 8px; /* Add some spacing between the image and the border */
+    border: 2px solid transparent; /* Add a border to the image */
+}
+
+.fish-checkbox:checked + label img {
+    border-color: #4CAF50; /* Change the border color when checked */
 }
