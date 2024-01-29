@@ -1,20 +1,26 @@
-// dropdown.js
 document.addEventListener('DOMContentLoaded', function () {
     var dropdownBtn = document.getElementById('fish-dropdown-btn');
     var dropdownContent = document.getElementById('fish-dropdown-content');
     var checkboxesContainer = document.getElementById('checkboxes-container');
 
-    // Display/hide dropdown content
-    dropdownBtn.addEventListener('click', function () {
+    // Function to toggle dropdown visibility
+    function toggleDropdown(event) {
+        event.stopPropagation(); // Prevent event from reaching document click listener
         dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // Display/hide dropdown content when clicking the button
+    dropdownBtn.addEventListener('click', function (event) {
+        toggleDropdown(event);
     });
 
     // Close dropdown when clicking outside of it
-    document.addEventListener('click', function (event) {
-        if (!event.target.matches('#fish-dropdown-btn') && !event.target.matches('.fish-checkbox')) {
-            dropdownContent.style.display = 'none';
-        }
+    document.addEventListener('click', function () {
+        dropdownContent.style.display = 'none';
     });
+
+    // Initially hide the dropdown content
+    dropdownContent.style.display = 'none';
 
     // Create checkboxes based on manualFishNames
     const manualFishNames = [
@@ -54,15 +60,30 @@ document.addEventListener('DOMContentLoaded', function () {
             fishImage.alt = fishName.replace('.gif', ''); // Alt text without '.gif'
             label.appendChild(fishImage);
 
+            // Set initial border state
+            if (checkbox.checked) {
+                label.classList.add('selected-border');
+            }
+
             checkboxesContainer.appendChild(label);
         });
 
     // Handle checkbox change event
     checkboxesContainer.addEventListener('change', function (event) {
         if (event.target.matches('.fish-checkbox')) {
-            // You can customize this function to perform actions when checkboxes change
-            console.log('Fish selected:', event.target.value, 'Checked:', event.target.checked);
+            const isSelected = event.target.checked;
+            toggleBorderClass(event.target.parentNode, isSelected);
+            console.log('Fish selected:', event.target.value, 'Checked:', isSelected);
             // Add logic to update the displayed fish based on checkbox state
         }
     });
+
+    // Function to toggle the border class
+    function toggleBorderClass(element, isSelected) {
+        if (isSelected) {
+            element.classList.add('selected-border');
+        } else {
+            element.classList.remove('selected-border');
+        }
+    }
 });

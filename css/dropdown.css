@@ -30,13 +30,6 @@ label:hover {
     border-color: #00f; /* Change border color when checkbox is checked */
 }
 
-label {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-    cursor: pointer;
-}
-
 label img {
     width: 30px; /* Adjust the width of the fish image */
     height: auto;
@@ -45,5 +38,13 @@ label img {
 }
 
 .fish-checkbox:checked + label img {
+    border-color: #4CAF50; /* Change the border color when checked */
+}
+
+/* Add a class for selected border */
+.selected-border {
+    border-color: #00f; /* Change the border color when checked */
+}
+.selected-border label {
     border-color: #4CAF50; /* Change the border color when checked */
 }
