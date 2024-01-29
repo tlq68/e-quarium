@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Sets audio volume
 document.addEventListener('DOMContentLoaded', function () {
     const audio = document.getElementById('backgroundAudio');
-    audio.volume = 0.3; // Set the volume to 30%
+    audio.volume = 0.2; // Set the volume to 30%
 });
 
 // Controls fish behavior
