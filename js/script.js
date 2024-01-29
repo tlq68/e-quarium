@@ -1,3 +1,25 @@
+//script.js
+
+// Manually input fish names
+export const manualFishNames = [
+    'Algae.gif',
+    'Algae flip.gif',
+    'Angel.gif',
+    'Angel flip.gif',
+    'Angler.gif',
+    'Angler flip.gif',
+    'Blue.gif',
+    'Blue flip.gif',
+    'Catfish.gif',
+    'Catfish flip.gif',
+    'Jelly.gif',
+    'Jelly flip.gif',
+    'Lion.gif',
+    'Lion flip.gif',
+    'Puffer.gif',
+    'Puffer flip.gif'
+];
+
 // Controls fish behavior
 document.addEventListener('DOMContentLoaded', async function () {
     const aquarium = document.getElementById('aquarium');
@@ -13,27 +35,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     let aquariumHeight = aquarium.clientHeight;
 
     window.addEventListener('resize', updateAquariumDimensions);
-
-    // Manually input fish names
-    const manualFishNames = [
-        'Algae.gif',
-        'Algae flip.gif',
-        'Angel.gif',
-        'Angel flip.gif',
-        'Angler.gif',
-        'Angler flip.gif',
-        'Blue.gif',
-        'Blue.gif',
-        'Blue flip.gif',
-        'Catfish.gif',
-        'Catfish flip.gif',
-        'Jelly.gif',
-        'Jelly flip.gif',
-        'Lion.gif',
-        'Lion flip.gif',
-        'Puffer.gif',
-        'Puffer flip.gif'
-    ];
 
     const bottomGlidingFish = [
         'Crab.gif',

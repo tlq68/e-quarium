@@ -1,3 +1,7 @@
+// dropdown.js
+
+import { manualFishNames } from './script.js';
+
 document.addEventListener('DOMContentLoaded', function () {
     var dropdownBtn = document.getElementById('fish-dropdown-btn');
     var dropdownContent = document.getElementById('fish-dropdown-content');
@@ -21,26 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initially hide the dropdown content
     dropdownContent.style.display = 'none';
-
-    // Create checkboxes based on manualFishNames
-    const manualFishNames = [
-        'Algae.gif',
-        'Algae flip.gif',
-        'Angel.gif',
-        'Angel flip.gif',
-        'Angler.gif',
-        'Angler flip.gif',
-        'Blue.gif',
-        'Blue flip.gif',
-        'Catfish.gif',
-        'Catfish flip.gif',
-        'Jelly.gif',
-        'Jelly flip.gif',
-        'Lion.gif',
-        'Lion flip.gif',
-        'Puffer.gif',
-        'Puffer flip.gif'
-    ];
 
     manualFishNames
         .filter(fishName => !fishName.endsWith('flip.gif'))
