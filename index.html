@@ -10,15 +10,20 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <audio id="backgroundAudio" autoplay loop controls>
-        <source src="assets\audio\Fish1.m4a" type="audio/mp4">
-        Your browser does not support the audio tag.
-    </audio>
+    <div id="top-bar">
+        <button id="toggleAudioButton">Toggle Audio</button>
+        
+        <audio id="backgroundAudio" loop>
+            <source src="assets\audio\Fish1.m4a" type="audio/mp4">
+            Your browser does not support the audio tag.
+        </audio>
+    </div>
+
     <div id="aquarium-container">
         <div id="aquarium" class="aquarium-flex-container">
 
-            <!-- Castle element -->
-            <div class="castle" id="castle">
+             <!-- Castle element -->
+             <div class="castle" id="castle">
                 <div class="kelp" id="kelp1"><img src="assets/Kelp.gif" alt="Kelp 1"></div>
                 <div class="kelp" id="kelp2"><img src="assets/Kelp.gif" alt="Kelp 2"></div>
                 <img src="assets/Castle CLEAR.gif" alt="Castle">
@@ -26,14 +31,13 @@
                 <div class="kelp" id="kelp4"><img src="assets/Kelp.gif" alt="Kelp 4"></div>
                 <div class="kelp" id="kelp5"><img src="assets/Kelp.gif" alt="Kelp 5"></div>
             </div>
-            <!-- Kelp elements -->
-            <!-- Add more kelp elements as needed -->
-
+            
             <!-- Fish container -->
             <div id="fish-container"></div>
 
         </div>
     </div>
+
     <script src="js/script.js"></script>
 </body>
 </html>
