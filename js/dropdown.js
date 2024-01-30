@@ -26,31 +26,33 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initially hide the dropdown content
     dropdownContent.style.display = 'none';
 
-    transformedFishArray
-        .filter(fishName => !fishName.endsWith('flip.gif'))
-        .forEach(function (fishName) {
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.className = 'fish-checkbox';
-            checkbox.value = fishName;
-            checkbox.checked = true; // Set default state to checked
+    transformedFishArray.forEach(function (fishObject) {
+        const fishName = Object.keys(fishObject)[0];
+        const images = fishObject[fishName][1].images;
 
-            const label = document.createElement('label');
-            label.appendChild(checkbox);
+        // Create checkbox for each fish
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'fish-checkbox';
+        checkbox.value = fishName;
+        checkbox.checked = true; // Set default state to checked
 
-            // Create a small image of the fish for the label
-            const fishImage = document.createElement('img');
-            fishImage.src = `assets/${fishName}`;
-            fishImage.alt = fishName.replace('.gif', ''); // Alt text without '.gif'
-            label.appendChild(fishImage);
+        const label = document.createElement('label');
+        label.appendChild(checkbox);
 
-            // Set initial border state
-            if (checkbox.checked) {
-                label.classList.add('selected-border');
-            }
+        // Create a small image of the fish for the label
+        const fishImage = document.createElement('img');
+        fishImage.src = `assets/${fishName}`;
+        fishImage.alt = fishName.replace('.gif', ''); // Alt text without '.gif'
+        label.appendChild(fishImage);
 
-            checkboxesContainer.appendChild(label);
-        });
+        // Set initial border state
+        if (checkbox.checked) {
+            label.classList.add('selected-border');
+        }
+
+        checkboxesContainer.appendChild(label);
+    });
 
     // Handle checkbox change event
     checkboxesContainer.addEventListener('change', function (event) {
