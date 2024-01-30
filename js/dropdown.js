@@ -1,6 +1,6 @@
 // dropdown.js
 
-import { manualFishNames } from './script.js';
+import { transformedFishArray } from './script.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     var dropdownBtn = document.getElementById('fish-dropdown-btn');
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initially hide the dropdown content
     dropdownContent.style.display = 'none';
 
-    manualFishNames
+    transformedFishArray
         .filter(fishName => !fishName.endsWith('flip.gif'))
         .forEach(function (fishName) {
             const checkbox = document.createElement('input');

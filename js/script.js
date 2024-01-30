@@ -1,7 +1,7 @@
 //script.js
 
 // Manually input fish names
-export const manualFishNames = [
+const manualFishNames = [
     'Algae.gif',
     'Algae flip.gif',
     'Angel.gif',
@@ -19,6 +19,32 @@ export const manualFishNames = [
     'Puffer.gif',
     'Puffer flip.gif'
 ];
+
+export const transformedFishArray = [];
+
+for (let i = 0; i < manualFishNames.length; i += 2) {
+  const fishName = manualFishNames[i];
+  const flipFishName = manualFishNames[i + 1];
+
+  const fishObject = {};
+  fishObject[fishName] = [
+    { 'selected': true },
+    { 'images': [fishName, flipFishName] }
+  ];
+
+  transformedFishArray.push(fishObject);
+}
+  
+  console.log(transformedFishArray);
+
+  transformedFishArray.forEach((fishObject) => {
+    const fishName = Object.keys(fishObject)[0];
+    const images = fishObject[fishName][1].images;
+
+    console.log(`Fish: ${fishName}`);
+    console.log(`Images: ${images.join(', ')}`);
+    console.log('----');
+  })
 
 // Controls fish behavior
 document.addEventListener('DOMContentLoaded', async function () {
