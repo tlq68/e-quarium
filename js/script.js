@@ -68,35 +68,34 @@ document.addEventListener('DOMContentLoaded', async function () {
     ];
 
     function addFishManually() {
-        const fishImages = manualFishNames.map(fileName => `assets/${fileName}`);
-        for (const imgSrc of fishImages) {
-            setTimeout(() => {
-                addFish([imgSrc]);
-            }, Math.random() * 15000); // Adjust the time interval (in milliseconds) based on your preference
-        }
-    }
-
-    function addFish(images) {
+        transformedFishArray.forEach((fishObject) => {
+          const fishName = Object.keys(fishObject)[0];
+          const images = fishObject[fishName][1].images.map(fileName => `assets/${fileName}`);
+          addFish(images);
+        });
+      }
+    
+      function addFish(images) {
         for (const imgSrc of images) {
-            const fish = document.createElement('div');
-            fish.className = 'fish';
-            fishContainer.appendChild(fish);
-
-            const img = document.createElement('img');
-            img.src = imgSrc;
-            img.alt = 'Fish';
-            img.className = 'fish';
-            img.classList.add('fish-moving');
-
-            // Determine the movement direction based on the filename
-            const movementDirection = imgSrc.endsWith('flip.gif') ? 'right' : 'left';
-            fish.dataset.movementDirection = movementDirection;
-
-            fish.appendChild(img);
-
-            moveFishRandomly(fish);
+          const fish = document.createElement('div');
+          fish.className = 'fish';
+          fishContainer.appendChild(fish);
+    
+          const img = document.createElement('img');
+          img.src = imgSrc;
+          img.alt = 'Fish';
+          img.className = 'fish';
+          img.classList.add('fish-moving');
+    
+          // Determine the movement direction based on the filename
+          const movementDirection = imgSrc.endsWith('flip.gif') ? 'right' : 'left';
+          fish.dataset.movementDirection = movementDirection;
+    
+          fish.appendChild(img);
+    
+          moveFishRandomly(fish);
         }
-    }
+      }
 
     function addBottomGlidingFishManually() {
         for (const imgSrc of bottomGlidingFish) {
