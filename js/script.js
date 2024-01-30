@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     function addBottomGlidingFishManually() {
         for (const imgSrc of bottomGlidingFish) {
             setTimeout(() => {
-                addBottomGlidingFish([`assets/${imgSrc}`]);
+                addBottomGlidingFish([`${imgSrc}`]);
             }, Math.random() * 5000); // Adjust the time interval (in milliseconds) based on your preference
         }
     }
