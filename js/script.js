@@ -205,7 +205,7 @@ const manualFishNames = [
         const y = Math.random() * (maxY - minY) + minY;
     
         return { x, y };
-    }
+      }
     
   
       function getRandomPosition() {
@@ -217,7 +217,7 @@ const manualFishNames = [
         const y = Math.random() * (maxY - minY) + minY;
     
         return { x, y };
-    }
+      }
    
   
       const initialPosition = getInitialPosition();

@@ -1,11 +1,9 @@
 /* dropdown.css */
 
-/* Add this style to arrange the fish checkboxes in a grid */
 #checkboxes-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
-    gap: 10px; /* Adjust the gap between checkboxes as needed */
-    margin-top: 65%; /* Add margin to create space between checkboxes and top bar */
+    display: flex;
+    justify-content: space-around; /* Adjust the spacing as needed */
+    align-items: center;
     background-color: rgba(25, 25, 25, .2);
 }
 
@@ -18,8 +16,8 @@ label {
     flex-direction: column;
     align-items: center;
     border: 2px solid transparent; /* Add a border to indicate selection */
-    padding: 5px;
     cursor: pointer;
+    margin: 5px; /* Adjust the margin as needed */
 }
 
 label:hover {

@@ -3,7 +3,6 @@
 import { transformedFishArray } from './script.js';
 
 document.addEventListener('DOMContentLoaded', function () {
-    var dropdownBtn = document.getElementById('fish-dropdown-btn');
     var dropdownContent = document.getElementById('fish-dropdown-content');
     var checkboxesContainer = document.getElementById('checkboxes-container');
 
@@ -12,11 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
         event.stopPropagation(); // Prevent event from reaching document click listener
         dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
     }
-
-    // Display/hide dropdown content when clicking the button
-    dropdownBtn.addEventListener('click', function (event) {
-        toggleDropdown(event);
-    });
 
     // Close dropdown when clicking outside of it
     document.addEventListener('click', function () {
