@@ -39,32 +39,33 @@ const manualFishNames = [
     console.log('updateFishSelection function called'); // Add this line
     const selectedBorders = document.querySelectorAll('.selected-border');
   
-    // Initialize a map to keep track of selected fish names
-    const selectedFishNames = new Set();
+    // Initialize an array to keep track of selected fish names
+    const selectedFishNames = [];
   
     selectedBorders.forEach(border => {
       const input = border.querySelector('input');
       if (input) {
-        selectedFishNames.add(input.value);
+        selectedFishNames.push(input.value);
       }
     });
   
     // Update the transformedFishArray based on the selectedFishNames
     transformedFishArray.forEach(fishObject => {
       const fishName = Object.keys(fishObject)[0];
-      const isSelected = selectedFishNames.has(fishName);
+      const isSelected = selectedFishNames.includes(fishName);
       fishObject[fishName][0].selected = isSelected;
     });
   
     // Log the selected fish names for debugging
-    console.log('Selected Fish Names:', Array.from(selectedFishNames));
+    console.log('Selected Fish Names:', selectedFishNames);
   
     // Log the transformedFishArray for debugging
     console.log('Transformed Fish Array:', transformedFishArray);
   
-    return Promise.resolve(selectedFishNames);
+    return selectedFishNames;
   }
-  
+
+
   console.log(transformedFishArray);
   
   transformedFishArray.forEach((fishObject) => {
@@ -100,16 +101,16 @@ const manualFishNames = [
     let firstFishTriggered = false;
 
     async function addFishManually(selectedFishNames, fishArray) {
-        for (const fishObject of fishArray) {
-            const fishName = Object.keys(fishObject)[0];
-            console.log("WE ARE HERE")
-            if (selectedFishNames.has(fishName) && fishObject[fishName][0].selected) {
-                const [fishFileName, flipFishFileName] = fishObject[fishName][1].images;
-                const images = [`assets/${fishFileName}`, `assets/${flipFishFileName}`];
-                await addFish(images[0]);
-            }
-        }
-    }      
+      for (const fishObject of fishArray) {
+          const fishName = Object.keys(fishObject)[0];
+          console.log("WE ARE HERE")
+          if (selectedFishNames.includes(fishName) && fishObject[fishName][0].selected) {
+              const [fishFileName, flipFishFileName] = fishObject[fishName][1].images;
+              const images = [`assets/${fishFileName}`, `assets/${flipFishFileName}`];
+              await addFish(images[0]);
+          }
+      }
+  }    
   
     function addFish(images) {
         const fish = document.createElement('div');
@@ -245,7 +246,8 @@ const manualFishNames = [
               setTimeout(() => {
                 element.removeEventListener('transitionend', handleTransitionEnd);
                 fishContainer.removeChild(element);
-
+                
+                selectedFishNames = updateFishSelection();
                 // Inside the animateFish function, directly use the image source obtained
                 const imgSrc = getRandomFishImage(selectedFishNames);
 
@@ -324,36 +326,27 @@ const manualFishNames = [
     }
   
     function getRandomFishImage(selectedFishNames) {
-        // Filter transformedFishArray based on selected fish names
-        const availableFishObjects = transformedFishArray.filter(fishObject => {
-          const fishName = Object.keys(fishObject)[0];
-          return selectedFishNames.has(fishName) && fishObject[fishName][0].selected;
-        });
-
-        setTimeout(() => {
-            console.log("We are at availableFishObjects" + availableFishObjects);
-          }, Math.random() * 3000);
-
-        // Check if there are available fish objects
-        if (availableFishObjects.length > 0) {
-          const randomIndex = Math.floor(Math.random() * availableFishObjects.length);
-          const fishObject = availableFishObjects[randomIndex];
-          const fishName = Object.keys(fishObject);
-          const images = fishObject[fishName][1].images;
-          const randomImageIndex = Math.floor(Math.random() * images.length);
-          return `assets/${images[randomImageIndex]}`;
-        } else {
-          // If no fish is selected, return a default fish
-          const randomIndex = Math.floor(Math.random() * transformedFishArray.length);
-          const fishObject = transformedFishArray[randomIndex];
-          const fishName = Object.keys(fishObject);
-          const images = fishObject[fishName][1].images;
-          const randomImageIndex = Math.floor(Math.random() * images.length);
-          return `assets/${images[randomImageIndex]}`;
-        }
-      }
-      
+      // Check if there are selected fish names
+      console.log("HERE ARE THE SELECTED FISH: " + selectedFishNames)
+      if (selectedFishNames.length > 0) {
+          const randomFishName = selectedFishNames[Math.floor(Math.random() * selectedFishNames.length)];
+          const fishObject = transformedFishArray.find(fishObject => {
+              const fishName = Object.keys(fishObject)[0];
+              return selectedFishNames.includes(fishName) && fishObject[fishName][0].selected;
+          });
   
+          if (fishObject) {
+              const fishName = Object.keys(fishObject)[0];
+              const images = fishObject[fishName][1].images;
+              const randomImageIndex = Math.floor(Math.random() * images.length);
+              // Return the selected fish image without prepending 'assets/'
+              return `assets/${images[randomImageIndex]}`;
+          }
+      }
+      // If no fish is selected or found, return a default fish
+      return 'defaultFish.gif'; // Change this to your actual default fish image
+  }
+      
     // Add an event listener to checkboxes to trigger the updateFishSelection function
     const checkboxesContainer = document.getElementById('checkboxes-container');
     checkboxesContainer.addEventListener('change', async function () {
