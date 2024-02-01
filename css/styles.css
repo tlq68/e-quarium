@@ -14,7 +14,7 @@ body {
     height: 4rem;
     background-color: #333;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     padding-right: 1rem;
     z-index: 12;
