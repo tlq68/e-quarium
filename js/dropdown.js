@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Initially hide the dropdown content
-    dropdownContent.style.display = 'none';
+    //dropdownContent.style.display = 'none';
 
     transformedFishArray.forEach(function (fishObject) {
         const fishName = Object.keys(fishObject)[0];
