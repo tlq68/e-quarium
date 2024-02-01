@@ -12,11 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
         dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
     }
 
-    // Close dropdown when clicking outside of it
-    document.addEventListener('click', function () {
-        dropdownContent.style.display = 'none';
-    });
-
     // Initially hide the dropdown content
     //dropdownContent.style.display = 'none';
 

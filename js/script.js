@@ -196,12 +196,15 @@ const manualFishNames = [
     function moveFishRandomly(element) {
       let isFishStopped = false;
   
+      const minHeightAdjustment = 0.15;
+      const maxHeightAdjustment = 0.85;
+      
       function getInitialPosition() {
         const x = (element.dataset.movementDirection === 'left') ? aquariumWidth + element.clientWidth : -element.clientWidth * 2;
-    
+        
         // Adjust the y-coordinate to ensure the fish stays within the desired vertical bounds
-        const minY = aquariumHeight * 0.25; // 25% up from the bottom
-        const maxY = aquariumHeight * 0.95 - element.clientHeight; // 5% down from the top
+        const minY = aquariumHeight * minHeightAdjustment; // up from the bottom
+        const maxY = aquariumHeight * maxHeightAdjustment - element.clientHeight; // down from the top
         const y = Math.random() * (maxY - minY) + minY;
     
         return { x, y };
@@ -212,8 +215,8 @@ const manualFishNames = [
         const x = Math.random() * (aquariumWidth + element.clientWidth);
     
         // Adjust the y-coordinate to ensure the fish stays within the desired vertical bounds
-        const minY = aquariumHeight * 0.25; // 25% up from the bottom
-        const maxY = aquariumHeight * 0.95 - element.clientHeight; // 5% down from the top
+        const minY = aquariumHeight * minHeightAdjustment; // up from the bottom
+        const maxY = aquariumHeight * maxHeightAdjustment - element.clientHeight; // down from the top
         const y = Math.random() * (maxY - minY) + minY;
     
         return { x, y };
