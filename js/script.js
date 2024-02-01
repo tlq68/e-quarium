@@ -77,6 +77,9 @@ const manualFishNames = [
     console.log('----');
   })
   
+  let fishCounter = 0;
+  const maxFishLimit = 50;
+
   // Controls fish behavior
   document.addEventListener('DOMContentLoaded', async function () {
     const aquarium = document.getElementById('aquarium');
@@ -101,16 +104,28 @@ const manualFishNames = [
     let firstFishTriggered = false;
 
     async function addFishManually(selectedFishNames, fishArray) {
-      for (const fishObject of fishArray) {
+      for (let i = 0; i < maxFishLimit; i++) {
+          // Randomly select a fish from the available ones
+          const randomFishIndex = Math.floor(Math.random() * fishArray.length);
+          const fishObject = fishArray[randomFishIndex];
           const fishName = Object.keys(fishObject)[0];
+
           console.log("WE ARE HERE")
           if (selectedFishNames.includes(fishName) && fishObject[fishName][0].selected) {
               const [fishFileName, flipFishFileName] = fishObject[fishName][1].images;
               const images = [`assets/${fishFileName}`, `assets/${flipFishFileName}`];
-              await addFish(images[0]);
+
+              // Check if the fishCounter is below the maximum limit
+              if (fishCounter < maxFishLimit) {
+                  await addFish(images[0]);
+                  fishCounter++; // Increment fishCounter
+              } else {
+                  console.log('Maximum fish limit reached. Cannot add more fish.');
+                  break; // Exit the loop if the maximum limit is reached
+              }
           }
       }
-  }    
+  } 
   
     function addFish(images) {
         const fish = document.createElement('div');
@@ -132,6 +147,8 @@ const manualFishNames = [
   
         moveFishRandomly(fish);
   
+        fishCounter++;
+
         console.log(`Fish created: ${images}`)
       
     }
@@ -160,7 +177,8 @@ const manualFishNames = [
         crab.dataset.movementDirection = movementDirection;
   
         crab.appendChild(img);
-  
+        fishCounter++;
+
         moveBottomGlidingFish(crab);
       }
     }
@@ -261,7 +279,7 @@ const manualFishNames = [
               setTimeout(() => {
                 element.removeEventListener('transitionend', handleTransitionEnd);
                 fishContainer.removeChild(element);
-                
+                fishCounter--;
                 selectedFishNames = updateFishSelection();
                 // Inside the animateFish function, directly use the image source obtained
                 const imgSrc = getRandomFishImage(selectedFishNames);
@@ -328,6 +346,7 @@ const manualFishNames = [
               setTimeout(() => {
                 element.removeEventListener('transitionend', handleTransitionEnd);
                 fishContainer.removeChild(element);
+                fishCounter--;
                 addBottomGlidingFish([`${bottomGlidingFish[Math.floor(Math.random() * 2)]}`]);
               }, respawnDelay);
             }
