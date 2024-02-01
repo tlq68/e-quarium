@@ -198,15 +198,27 @@ const manualFishNames = [
   
       function getInitialPosition() {
         const x = (element.dataset.movementDirection === 'left') ? aquariumWidth + element.clientWidth : -element.clientWidth * 2;
-        const y = Math.random() * (aquariumHeight - element.clientHeight);
+    
+        // Adjust the y-coordinate to ensure the fish stays within the desired vertical bounds
+        const minY = aquariumHeight * 0.25; // 25% up from the bottom
+        const maxY = aquariumHeight * 0.95 - element.clientHeight; // 5% down from the top
+        const y = Math.random() * (maxY - minY) + minY;
+    
         return { x, y };
-      }
+    }
+    
   
       function getRandomPosition() {
         const x = Math.random() * (aquariumWidth + element.clientWidth);
-        const y = Math.random() * (aquariumHeight + element.clientHeight);
+    
+        // Adjust the y-coordinate to ensure the fish stays within the desired vertical bounds
+        const minY = aquariumHeight * 0.25; // 25% up from the bottom
+        const maxY = aquariumHeight * 0.95 - element.clientHeight; // 5% down from the top
+        const y = Math.random() * (maxY - minY) + minY;
+    
         return { x, y };
-      }
+    }
+   
   
       const initialPosition = getInitialPosition();
       element.style.transform = `translate(${initialPosition.x}px, ${initialPosition.y}px)`;
