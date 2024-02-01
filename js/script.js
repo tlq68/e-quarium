@@ -34,6 +34,30 @@ for (let i = 0; i < manualFishNames.length; i += 2) {
 
   transformedFishArray.push(fishObject);
 }
+
+function updateFishSelection() {
+    console.log('updateFishSelection function called'); // Add this line
+    const selectedBorders = document.querySelectorAll('.selected-border');
+  
+    // Initialize a map to keep track of selected fish names
+    const selectedFishNames = new Set();
+  
+    selectedBorders.forEach(border => {
+      const input = border.querySelector('input');
+      if (input) {
+        selectedFishNames.add(input.value);
+      }
+    });
+  
+    // Update the transformedFishArray based on the selectedFishNames
+    transformedFishArray.forEach(fishObject => {
+      const fishName = Object.keys(fishObject)[0];
+      const isSelected = selectedFishNames.has(fishName);
+      fishObject[fishName][0].selected = isSelected;
+    });
+    // Log the selected fish names for debugging
+    console.log('Selected Fish Names:', Array.from(selectedFishNames));
+  }
   
   console.log(transformedFishArray);
 
@@ -70,8 +94,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     function addFishManually() {
         transformedFishArray.forEach((fishObject) => {
           const fishName = Object.keys(fishObject)[0];
-          const images = fishObject[fishName][1].images.map(fileName => `assets/${fileName}`);
-          addFish(images);
+          if (fishName) {
+            const images = fishObject[fishName][1].images.map(fileName => `assets/${fileName}`);
+            addFish(images);
+          }
+          
         });
       }
     
@@ -284,6 +311,14 @@ document.addEventListener('DOMContentLoaded', async function () {
         const randomIndex = Math.floor(Math.random() * manualFishNames.length);
         return manualFishNames[randomIndex];
     }
+
+    // Add an event listener to checkboxes to trigger the updateFishSelection function
+        const checkboxesContainer = document.getElementById('checkboxes-container');
+        checkboxesContainer.addEventListener('change', updateFishSelection);
+        console.log('The event is listening')
+
+    // Updates fish to be used
+    updateFishSelection();
 
     // Add regular fish and bottom-gliding fish manually
     addFishManually();

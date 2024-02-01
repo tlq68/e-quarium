@@ -56,13 +56,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Handle checkbox change event
     checkboxesContainer.addEventListener('change', function (event) {
-        if (event.target.matches('.fish-checkbox')) {
-            const isSelected = event.target.checked;
-            toggleBorderClass(event.target.parentNode, isSelected);
-            console.log('Fish selected:', event.target.value, 'Checked:', isSelected);
-            // Add logic to update the displayed fish based on checkbox state
-        }
-    });
+    const checkbox = event.target.closest('.fish-checkbox');
+    if (checkbox) {
+        const isSelected = checkbox.checked;
+        toggleBorderClass(checkbox.parentNode, isSelected);
+        console.log('Fish selected:', checkbox.value, 'Checked:', isSelected);
+        // Add logic to update the displayed fish based on checkbox state
+    }
+});
 
     // Function to toggle the border class
     function toggleBorderClass(element, isSelected) {
