@@ -329,23 +329,29 @@ const manualFishNames = [
       // Check if there are selected fish names
       console.log("HERE ARE THE SELECTED FISH: " + selectedFishNames)
       if (selectedFishNames.length > 0) {
+          // Get a random fish name from the selected array
           const randomFishName = selectedFishNames[Math.floor(Math.random() * selectedFishNames.length)];
-          const fishObject = transformedFishArray.find(fishObject => {
+          const fishObjects = transformedFishArray.filter(fishObject => {
               const fishName = Object.keys(fishObject)[0];
               return selectedFishNames.includes(fishName) && fishObject[fishName][0].selected;
           });
   
-          if (fishObject) {
-              const fishName = Object.keys(fishObject)[0];
-              const images = fishObject[fishName][1].images;
+          if (fishObjects.length > 0) {
+              // Get a random fish object from the filtered array
+              const randomFishObject = fishObjects[Math.floor(Math.random() * fishObjects.length)];
+              const fishName = Object.keys(randomFishObject)[0];
+              const images = randomFishObject[fishName][1].images;
+  
+              // Return a random image from the selected fish
               const randomImageIndex = Math.floor(Math.random() * images.length);
-              // Return the selected fish image without prepending 'assets/'
               return `assets/${images[randomImageIndex]}`;
           }
       }
+  
       // If no fish is selected or found, return a default fish
       return 'defaultFish.gif'; // Change this to your actual default fish image
   }
+  
       
     // Add an event listener to checkboxes to trigger the updateFishSelection function
     const checkboxesContainer = document.getElementById('checkboxes-container');
