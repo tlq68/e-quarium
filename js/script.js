@@ -1,40 +1,67 @@
-// ... (your existing code)
+// script.js
 
 // Manually input fish names
 const manualFishNames = [
-    'Algae.gif',
-    'Algae flip.gif',
-    'Angel.gif',
-    'Angel flip.gif',
-    'Angler.gif',
-    'Angler flip.gif',
-    'Blue.gif',
-    'Blue flip.gif',
-    'Catfish.gif',
-    'Catfish flip.gif',
-    'Jelly.gif',
-    'Jelly flip.gif',
-    'Lion.gif',
-    'Lion flip.gif',
-    'Puffer.gif',
-    'Puffer flip.gif'
-  ];
-  
-  export const transformedFishArray = [];
-  
-  for (let i = 0; i < manualFishNames.length; i += 2) {
-    const fishName = manualFishNames[i];
-    const flipFishName = manualFishNames[i + 1];
-  
-    const fishObject = {};
-    fishObject[fishName] = [
+  'Algae.gif',
+  'Algae flip.gif',
+  'Angel.gif',
+  'Angel flip.gif',
+  'Angler.gif',
+  'Angler flip.gif',
+  'Blue.gif',
+  'Blue flip.gif',
+  'Catfish.gif',
+  'Catfish flip.gif',
+  'Jelly.gif',
+  'Jelly flip.gif',
+  'Lion.gif',
+  'Lion flip.gif',
+  'Puffer.gif',
+  'Puffer flip.gif'
+];
+
+// Manually input bottom gliding fish names
+const bottomGlidingFish = [
+  'Crab.gif',
+  'Crab flip.gif'
+];
+
+const transformedFishArray = [];
+
+// Loop for regular fish
+for (let i = 0; i < manualFishNames.length; i += 2) {
+  const fishName = manualFishNames[i];
+  const flipFishName = manualFishNames[i + 1];
+
+  const fishObject = {};
+  fishObject[fishName] = [
       { 'selected': true },
       { 'images': [fishName, flipFishName] }
-    ];
+  ];
+
+  transformedFishArray.push(fishObject);
+}
+
+const crabFishObject = {
+  'Crab.gif': [
+      { 'selected': true },
+      { 'images': ['Crab.gif', 'Crab flip.gif'] }
+  ]
+};
+
+// // Loop for bottom gliding fish
+// for (const fishName of bottomGlidingFish) {
+//   const fishObject = {};
+//   fishObject[fishName] = [
+//       { 'selected': true },
+//       { 'images': [fishName] }
+//   ];
+
+//   transformedFishArray.push(fishObject);
+// }
   
-    transformedFishArray.push(fishObject);
-  }
-  
+export const floatingFish = [...transformedFishArray];
+
   function updateFishSelection() {
     console.log('updateFishSelection function called'); // Add this line
     const selectedBorders = document.querySelectorAll('.selected-border');
@@ -78,7 +105,7 @@ const manualFishNames = [
   })
   
   let fishCounter = 0;
-  const maxFishLimit = 50;
+  const maxFishLimit = 15;
 
   // Controls fish behavior
   document.addEventListener('DOMContentLoaded', async function () {
@@ -95,11 +122,6 @@ const manualFishNames = [
     let aquariumHeight = aquarium.clientHeight;
   
     window.addEventListener('resize', updateAquariumDimensions);
-  
-    const bottomGlidingFish = [
-      'Crab.gif',
-      'Crab flip.gif'
-    ];
   
     let firstFishTriggered = false;
 
@@ -156,32 +178,32 @@ const manualFishNames = [
     function addBottomGlidingFishManually() {
       for (const imgSrc of bottomGlidingFish) {
         setTimeout(() => {
-          addBottomGlidingFish([`${imgSrc}`]);
+          addBottomGlidingFish(imgSrc);
         }, Math.random() * 5000); // Adjust the time interval (in milliseconds) based on your preference
       }
     }
   
     function addBottomGlidingFish(images) {
-      for (const imgSrc of images) {
-        const crab = document.createElement('div');
-        crab.className = 'bottom-gliding-fish'; // Use a class for bottom-gliding fish
-        fishContainer.appendChild(crab);
+      console.log("CHECKING: " + images)
+      const crab = document.createElement('div');
+      crab.className = 'bottom-gliding-fish'; // Use a class for bottom-gliding fish
+      fishContainer.appendChild(crab);
   
-        const img = document.createElement('img');
-        img.src = `assets/${imgSrc}`;
-        img.alt = 'Crab';
-        img.className = 'bottom-gliding-fish-img'; // Use a separate class for styling bottom-gliding fish
+      const img = document.createElement('img');
+      img.src = `assets/${images}`;
+      img.alt = 'Crab';
+      img.className = 'bottom-gliding-fish-img'; // Use a separate class for styling bottom-gliding fish
   
-        // Determine the movement direction based on the filename
-        const movementDirection = imgSrc.endsWith('flip.gif') ? 'right' : 'left';
-        crab.dataset.movementDirection = movementDirection;
+      // Determine the movement direction based on the filename
+      const movementDirection = images.endsWith('flip.gif') ? 'right' : 'left';
+      crab.dataset.movementDirection = movementDirection;
   
-        crab.appendChild(img);
-        fishCounter++;
-
-        moveBottomGlidingFish(crab);
-      }
-    }
+      crab.appendChild(img);
+      fishCounter++;
+  
+      moveBottomGlidingFish(crab);
+  }
+  
   
     function addStationaryStar() {
       const star = document.createElement('div');
@@ -299,65 +321,70 @@ const manualFishNames = [
   
     function moveBottomGlidingFish(element) {
       let isFishStopped = false;
-  
+    
       function getInitialPosition() {
         const x = (element.dataset.movementDirection === 'left') ? aquariumWidth + element.clientWidth : -element.clientWidth * 2;
         const y = aquariumHeight - element.clientHeight + 20; // Adjusted to start at the bottom
         return { x, y };
       }
-  
+    
       function getRandomPosition() {
         const x = Math.random() * (aquariumWidth + element.clientWidth);
         const y = aquariumHeight - element.clientHeight; // Adjusted to stay at the bottom
         return { x, y };
       }
-  
+    
       const initialPosition = getInitialPosition();
       element.style.transform = `translate(${initialPosition.x}px, ${initialPosition.y}px)`;
-  
+    
       function animateBottomGlidingFish() {
         if (!isFishStopped) {
           const newPosition = getRandomPosition();
-  
+    
           const delayBeforeMove = Math.random() * 3000;
           const respawnDelay = Math.random() * 7000;
-  
+    
           element.style.transition = `transform 8s linear ${delayBeforeMove}ms`;
-  
+    
           const distanceMultiplier = 1.3;
           const endX = (element.dataset.movementDirection === 'left') ? -element.clientWidth * 2 : aquariumWidth + element.clientWidth;
           const endY = initialPosition.y; // Set endY to the initial Y position
-  
+    
           element.style.transform = `translate(${endX}px, ${endY}px)`;
-  
+    
           element.addEventListener('transitionend', function handleTransitionEnd(event) {
             if (event.propertyName === 'transform') {
               element.style.transition = 'none';
-  
+    
               // Flip the fish if it reaches the end of the aquarium
               if (element.dataset.movementDirection === 'left' && endX <= -element.clientWidth * 2) {
                 element.dataset.movementDirection = 'right';
               } else if (element.dataset.movementDirection === 'right' && endX >= aquariumWidth + element.clientWidth) {
                 element.dataset.movementDirection = 'left';
               }
-  
+    
               element.style.transform = `translate(${endX}px, ${endY}px)`;
-  
+    
               setTimeout(() => {
                 element.removeEventListener('transitionend', handleTransitionEnd);
                 fishContainer.removeChild(element);
                 fishCounter--;
-                addBottomGlidingFish([`${bottomGlidingFish[Math.floor(Math.random() * 2)]}`]);
+    
+                let imgSrc = bottomGlidingFish[Math.floor(Math.random() * bottomGlidingFish.length)];
+                console.log("imgSrc" + imgSrc)
+                updateFishSelection();
+                addBottomGlidingFish(imgSrc);
+
               }, respawnDelay);
             }
           }, { once: true });
         }
       }
-  
+    
       setTimeout(() => {
         animateBottomGlidingFish();
       }, Math.random() * 3000);
-    }
+    }    
   
     function getRandomFishImage(selectedFishNames) {
       // Check if there are selected fish names

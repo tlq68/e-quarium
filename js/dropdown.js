@@ -1,6 +1,6 @@
 // dropdown.js
 
-import { transformedFishArray } from './script.js';
+import { floatingFish } from './script.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     var dropdownContent = document.getElementById('fish-dropdown-content');
@@ -13,9 +13,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Initially hide the dropdown content
-    //dropdownContent.style.display = 'none';
+    // dropdownContent.style.display = 'none';
 
-    transformedFishArray.forEach(function (fishObject) {
+    // Add the crab manually to the floatingFish array
+    const crabFishObject = {
+        'Crab.gif': [
+            { 'selected': true },
+            { 'images': ['Crab.gif', 'Crab flip.gif'] }
+        ]
+    };
+
+    floatingFish.push(crabFishObject);
+
+    // Loop through the floatingFish array and create checkboxes for each fish
+    floatingFish.forEach(function (fishObject) {
         const fishName = Object.keys(fishObject)[0];
         const images = fishObject[fishName][1].images;
 
@@ -45,14 +56,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Handle checkbox change event
     checkboxesContainer.addEventListener('change', function (event) {
-    const checkbox = event.target.closest('.fish-checkbox');
-    if (checkbox) {
-        const isSelected = checkbox.checked;
-        toggleBorderClass(checkbox.parentNode, isSelected);
-        console.log('Fish selected:', checkbox.value, 'Checked:', isSelected);
-        // Add logic to update the displayed fish based on checkbox state
-    }
-});
+        const checkbox = event.target.closest('.fish-checkbox');
+        if (checkbox) {
+            const isSelected = checkbox.checked;
+            toggleBorderClass(checkbox.parentNode, isSelected);
+            console.log('Fish selected:', checkbox.value, 'Checked:', isSelected);
+            // Add logic to update the displayed fish based on checkbox state
+        }
+    });
 
     // Function to toggle the border class
     function toggleBorderClass(element, isSelected) {
