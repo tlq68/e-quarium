@@ -63,7 +63,6 @@ const crabFishObject = {
 export const floatingFish = [...transformedFishArray];
 
   function updateFishSelection() {
-    console.log('updateFishSelection function called'); // Add this line
     const selectedBorders = document.querySelectorAll('.selected-border');
   
     // Initialize an array to keep track of selected fish names
@@ -86,15 +85,9 @@ export const floatingFish = [...transformedFishArray];
     // Log the selected fish names for debugging
     console.log('Selected Fish Names:', selectedFishNames);
   
-    // Log the transformedFishArray for debugging
-    console.log('Transformed Fish Array:', transformedFishArray);
-  
     return selectedFishNames;
   }
 
-
-  console.log(transformedFishArray);
-  
   transformedFishArray.forEach((fishObject) => {
     const fishName = Object.keys(fishObject)[0];
     const images = fishObject[fishName][1].images;
@@ -132,7 +125,6 @@ export const floatingFish = [...transformedFishArray];
           const fishObject = fishArray[randomFishIndex];
           const fishName = Object.keys(fishObject)[0];
 
-          console.log("WE ARE HERE")
           if (selectedFishNames.includes(fishName) && fishObject[fishName][0].selected) {
               const [fishFileName, flipFishFileName] = fishObject[fishName][1].images;
               const images = [`assets/${fishFileName}`, `assets/${flipFishFileName}`];
@@ -184,25 +176,37 @@ export const floatingFish = [...transformedFishArray];
     }
   
     function addBottomGlidingFish(images) {
-      console.log("CHECKING: " + images)
-      const crab = document.createElement('div');
-      crab.className = 'bottom-gliding-fish'; // Use a class for bottom-gliding fish
-      fishContainer.appendChild(crab);
-  
-      const img = document.createElement('img');
-      img.src = `assets/${images}`;
-      img.alt = 'Crab';
-      img.className = 'bottom-gliding-fish-img'; // Use a separate class for styling bottom-gliding fish
-  
-      // Determine the movement direction based on the filename
-      const movementDirection = images.endsWith('flip.gif') ? 'right' : 'left';
-      crab.dataset.movementDirection = movementDirection;
-  
-      crab.appendChild(img);
-      fishCounter++;
-  
-      moveBottomGlidingFish(crab);
-  }
+      console.log("CHECKING addBottomGLidingFish: " + images);
+      selectedFishNames = updateFishSelection(); // Await the updateFishSelection function
+      const crabName = 'Crab.gif'; // assuming 'Crab.gif' is the only bottom-gliding fish
+      const isCrabSelected = selectedFishNames.includes(crabName);
+
+      if (isCrabSelected) {
+        // Add your logic here if the crab is selected
+        // Example: addBottomGlidingFish(images);
+        const crab = document.createElement('div');
+        crab.className = 'bottom-gliding-fish'; // Use a class for bottom-gliding fish
+        fishContainer.appendChild(crab);
+
+        const img = document.createElement('img');
+        img.src = `assets/${images}`;
+        img.alt = 'Crab';
+        img.className = 'bottom-gliding-fish-img'; // Use a separate class for styling bottom-gliding fish
+
+        // Determine the movement direction based on the filename
+        const movementDirection = images.endsWith('flip.gif') ? 'right' : 'left';
+        crab.dataset.movementDirection = movementDirection;
+
+        crab.appendChild(img);
+        fishCounter++;
+
+        moveBottomGlidingFish(crab);
+      } else {
+        console.log('Crab is not selected, so not adding to the aquarium.');
+      }
+
+    }
+    
   
   
     function addStationaryStar() {
@@ -431,7 +435,6 @@ export const floatingFish = [...transformedFishArray];
 
     // Wait for the initial updateFishSelection before proceeding
     let selectedFishNames = await updateFishSelection();
-    console.log("Selected Fish" + [...selectedFishNames])
 
     // Add regular fish and bottom-gliding fish manually
     addFishManually(selectedFishNames, transformedFishArray);
