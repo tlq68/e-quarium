@@ -27,6 +27,7 @@ const bottomGlidingFish = [
 ];
 
 const transformedFishArray = [];
+let selectedFishArraysEmpty = false;
 
 // Loop for regular fish
 for (let i = 0; i < manualFishNames.length; i += 2) {
@@ -142,6 +143,7 @@ export const floatingFish = [...transformedFishArray];
   } 
   
     function addFish(images) {
+      if (images) {
         const fish = document.createElement('div');
         fish.className = 'fish';
         fishContainer.appendChild(fish);
@@ -158,13 +160,13 @@ export const floatingFish = [...transformedFishArray];
         fish.dataset.movementDirection = movementDirection;
   
         fish.appendChild(img);
-  
+
         moveFishRandomly(fish);
   
         fishCounter++;
 
         console.log(`Fish created: ${images}`)
-      
+      }
     }
   
     function addBottomGlidingFishManually() {
@@ -176,35 +178,36 @@ export const floatingFish = [...transformedFishArray];
     }
   
     function addBottomGlidingFish(images) {
-      console.log("CHECKING addBottomGLidingFish: " + images);
-      selectedFishNames = updateFishSelection(); // Await the updateFishSelection function
-      const crabName = 'Crab.gif'; // assuming 'Crab.gif' is the only bottom-gliding fish
-      const isCrabSelected = selectedFishNames.includes(crabName);
+      if (images) {
+        console.log("CHECKING addBottomGLidingFish: " + images);
+        selectedFishNames = updateFishSelection(); // Await the updateFishSelection function
+        const crabName = 'Crab.gif'; // assuming 'Crab.gif' is the only bottom-gliding fish
+        const isCrabSelected = selectedFishNames.includes(crabName);
 
-      if (isCrabSelected) {
-        // Add your logic here if the crab is selected
-        // Example: addBottomGlidingFish(images);
-        const crab = document.createElement('div');
-        crab.className = 'bottom-gliding-fish'; // Use a class for bottom-gliding fish
-        fishContainer.appendChild(crab);
+        if (isCrabSelected) {
+          // Add your logic here if the crab is selected
+          // Example: addBottomGlidingFish(images);
+          const crab = document.createElement('div');
+          crab.className = 'bottom-gliding-fish'; // Use a class for bottom-gliding fish
+          fishContainer.appendChild(crab);
 
-        const img = document.createElement('img');
-        img.src = `assets/${images}`;
-        img.alt = 'Crab';
-        img.className = 'bottom-gliding-fish-img'; // Use a separate class for styling bottom-gliding fish
+          const img = document.createElement('img');
+          img.src = `assets/${images}`;
+          img.alt = 'Crab';
+          img.className = 'bottom-gliding-fish-img'; // Use a separate class for styling bottom-gliding fish
 
-        // Determine the movement direction based on the filename
-        const movementDirection = images.endsWith('flip.gif') ? 'right' : 'left';
-        crab.dataset.movementDirection = movementDirection;
+          // Determine the movement direction based on the filename
+          const movementDirection = images.endsWith('flip.gif') ? 'right' : 'left';
+          crab.dataset.movementDirection = movementDirection;
 
-        crab.appendChild(img);
-        fishCounter++;
+          crab.appendChild(img);
+          fishCounter++;
 
-        moveBottomGlidingFish(crab);
-      } else {
-        console.log('Crab is not selected, so not adding to the aquarium.');
+          moveBottomGlidingFish(crab);
+        } else {
+          console.log('Crab is not selected, so not adding to the aquarium.');
+        }
       }
-
     }
     
   
@@ -412,17 +415,15 @@ export const floatingFish = [...transformedFishArray];
               return `assets/${images[randomImageIndex]}`;
           }
       }
-  
       // If no fish is selected or found, return a default fish
-      return 'defaultFish.gif'; // Change this to your actual default fish image
+      console.log("There are no fish to add")
   }
   
-      
     // Add an event listener to checkboxes to trigger the updateFishSelection function
     const checkboxesContainer = document.getElementById('checkboxes-container');
     checkboxesContainer.addEventListener('change', async function () {
         // Updates fish to be used
-        const selectedFishNames = await updateFishSelection();
+        let selectedFishNames = updateFishSelection()
 
         if (!firstFishTriggered) {
             // Wait for updateFishSelection before proceeding
@@ -430,8 +431,21 @@ export const floatingFish = [...transformedFishArray];
             addBottomGlidingFishManually();
             firstFishTriggered = true;
         }
-    });
 
+
+        // Check if selectedFishNames is empty and if not, call addFishManually and addBottomGlidingFishManually
+        if (selectedFishNames.length > 0) {
+            if (selectedFishArraysEmpty) {
+              addFishManually(selectedFishNames, transformedFishArray);
+              let bottomGlidingFishImage = bottomGlidingFish[Math.floor(Math.random * bottomGlidingFish.length)];
+              addBottomGlidingFishManually(bottomGlidingFishImage);
+
+            }
+            
+        } else if (selectedFishNames.length <= 0) {
+          selectedFishArraysEmpty = true;
+        }
+    });
 
     // Wait for the initial updateFishSelection before proceeding
     let selectedFishNames = await updateFishSelection();
