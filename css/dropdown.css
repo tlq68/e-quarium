@@ -1,5 +1,22 @@
 /* dropdown.css */
 
+input#hamburger-icon {
+    display: none;
+}
+
+#top-bar {
+    position: fixed;
+    width: 100%;
+    height: 4rem;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 1rem;
+    z-index: 12;
+    top: env(safe-area-inset-top); /* Adjust top based on safe area */
+}
+
 .selectors-container {
     display: flex;
     width: 100%;
@@ -53,4 +70,81 @@ label img {
 }
 .selected-border label {
     border-color: #4CAF50; /* Change the border color when checked */
+}
+
+/* Add this at the end of your existing CSS */
+
+/* Hamburger menu styles for small screens */
+@media screen and (max-width: 600px) {
+    #checkboxes-container {
+        display: none; /* Hide the checkboxes container on small screens */
+    }
+
+    #checkboxes-container {
+        display: none; /* Hide the checkboxes container on small screens */
+        position: absolute;
+        top: 60px; /* Adjust the top position based on your layout */
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    /* Style for the hamburger icon */
+    #hamburger-icon {
+        cursor: pointer;
+        font-size: 24px;
+        color: #fff;
+    }
+
+    /* Display the dropdown content when the hamburger icon is clicked */
+    #hamburger-icon:checked ~ #checkboxes-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Adjust column size as needed */
+        gap: 10px; /* Adjust the gap between grid items as needed */
+    }
+
+    /* Hide the hamburger icon initially */
+    #hamburger-icon {
+        display: flex;
+    }
+
+    /* Styling for the hamburger icon label */
+    #hamburger-icon-label {
+        display: flex;
+        align-items: center;
+        border: 2px solid transparent;
+        cursor: pointer;
+        margin: 5px;
+    }
+
+    #hamburger-icon-label:hover {
+        border-color: #aaa;
+    }
+
+    /* Change border color when hamburger icon is checked */
+    #hamburger-icon:checked ~ #hamburger-icon-label {
+        border-color: #00f;
+    }
+
+    /* Change border color of the image when hamburger icon is checked */
+    #hamburger-icon:checked ~ #hamburger-icon-label img {
+        border-color: #4CAF50;
+    }
+
+    /* Styling for the hamburger icon image */
+    #hamburger-icon-label img {
+        width: 30px;
+        height: auto;
+        margin-right: 8px;
+        border: 2px solid transparent;
+    }
+
+    /* Change the border color of the image on hover when hamburger icon is checked */
+    #hamburger-icon:checked ~ #hamburger-icon-label:hover img {
+        border-color: #4CAF50;
+    }
+
+    
 }

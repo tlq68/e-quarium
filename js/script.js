@@ -99,7 +99,7 @@ export const floatingFish = [...transformedFishArray];
   })
   
   let fishCounter = 0;
-  const maxFishLimit = 15;
+  const maxFishLimit = 20;
 
   // Controls fish behavior
   document.addEventListener('DOMContentLoaded', async function () {
