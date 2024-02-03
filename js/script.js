@@ -447,6 +447,22 @@ export const floatingFish = [...transformedFishArray];
         }
     });
 
+    function initialFish() {
+      transformedFishArray.forEach(fish => {
+        const fishName = Object.keys(fish)[0]; // Get the fish name
+        const fishDetails = Object.values(fish)[0]; // Get the details object
+        const images = fishDetails[1].images; // Get the images array
+    
+        console.log(`Fish: ${fishName}`);
+        console.log(`Images: ${images.join(', ')}`);
+        const coinFlip = Math.floor(Math.random() * 2);
+        addFish(`assets/${images[coinFlip]}`);
+      });
+    }
+    
+
+    initialFish();
+
     // Wait for the initial updateFishSelection before proceeding
     let selectedFishNames = await updateFishSelection();
 
