@@ -50,16 +50,6 @@ const crabFishObject = {
   ]
 };
 
-// // Loop for bottom gliding fish
-// for (const fishName of bottomGlidingFish) {
-//   const fishObject = {};
-//   fishObject[fishName] = [
-//       { 'selected': true },
-//       { 'images': [fishName] }
-//   ];
-
-//   transformedFishArray.push(fishObject);
-// }
   
 export const floatingFish = [...transformedFishArray];
 
@@ -83,9 +73,6 @@ export const floatingFish = [...transformedFishArray];
       fishObject[fishName][0].selected = isSelected;
     });
   
-    // Log the selected fish names for debugging
-    console.log('Selected Fish Names:', selectedFishNames);
-  
     return selectedFishNames;
   }
 
@@ -97,15 +84,15 @@ export const floatingFish = [...transformedFishArray];
     console.log(`Images: ${images.join(', ')}`);
     console.log('----');
   })
-  
-  let fishCounter = 0;
-  const maxFishLimit = 20;
 
   // Controls fish behavior
   document.addEventListener('DOMContentLoaded', async function () {
     const aquarium = document.getElementById('aquarium');
     const fishContainer = document.getElementById('fish-container');
     
+    let fishCounter = 0;
+    let maxFishLimit = 20;
+
     function updateAquariumDimensions() {
       aquariumWidth = aquarium.clientWidth;
       aquariumHeight = aquarium.clientHeight;
@@ -120,30 +107,34 @@ export const floatingFish = [...transformedFishArray];
     let firstFishTriggered = false;
 
     async function addFishManually(selectedFishNames, fishArray) {
-      for (let i = 0; i < maxFishLimit; i++) {
-          // Randomly select a fish from the available ones
-          const randomFishIndex = Math.floor(Math.random() * fishArray.length);
-          const fishObject = fishArray[randomFishIndex];
-          const fishName = Object.keys(fishObject)[0];
-
-          if (selectedFishNames.includes(fishName) && fishObject[fishName][0].selected) {
-              const [fishFileName, flipFishFileName] = fishObject[fishName][1].images;
-              const images = [`assets/${fishFileName}`, `assets/${flipFishFileName}`];
-
-              // Check if the fishCounter is below the maximum limit
-              if (fishCounter < maxFishLimit) {
-                  await addFish(images[0]);
-                  fishCounter++; // Increment fishCounter
-              } else {
-                  console.log('Maximum fish limit reached. Cannot add more fish.');
-                  break; // Exit the loop if the maximum limit is reached
-              }
+      for (let i = 0; i < maxFishLimit || (maxFishLimit === 0 && i === 0); i++) {
+        // Randomly select a fish from the available ones
+        const randomFishIndex = Math.floor(Math.random() * fishArray.length);
+        const fishObject = fishArray[randomFishIndex];
+        const fishName = Object.keys(fishObject)[0];
+    
+        if (selectedFishNames.includes(fishName) && fishObject[fishName][0].selected) {
+          const [fishFileName, flipFishFileName] = fishObject[fishName][1].images;
+          const images = [`assets/${fishFileName}`, `assets/${flipFishFileName}`];
+    
+          // Check if the fishCounter is below the maximum limit
+          if (fishCounter < maxFishLimit) {
+            console.log("fishCounter" + fishCounter);
+            console.log("maxLimite" + maxFishLimit)
+            await addFish(images[0]);
+          } else {
+            console.log("Else test addFishManually: " + fishCounter);
+            console.log('Maximum fish limit reached. Cannot add more fish.');
+            break; // Exit the loop if the maximum limit is reached
           }
+        }
       }
-  } 
+    }
   
     function addFish(images) {
-      if (images) {
+            
+      if (images && fishCounter < maxFishLimit) {
+        
         const fish = document.createElement('div');
         fish.className = 'fish';
         fishContainer.appendChild(fish);
@@ -165,7 +156,6 @@ export const floatingFish = [...transformedFishArray];
   
         fishCounter++;
 
-        console.log(`Fish created: ${images}`)
       }
     }
   
@@ -179,7 +169,6 @@ export const floatingFish = [...transformedFishArray];
   
     function addBottomGlidingFish(images) {
       if (images) {
-        console.log("CHECKING addBottomGLidingFish: " + images);
         selectedFishNames = updateFishSelection(); // Await the updateFishSelection function
         const crabName = 'Crab.gif'; // assuming 'Crab.gif' is the only bottom-gliding fish
         const isCrabSelected = selectedFishNames.includes(crabName);
@@ -308,12 +297,21 @@ export const floatingFish = [...transformedFishArray];
               setTimeout(() => {
                 element.removeEventListener('transitionend', handleTransitionEnd);
                 fishContainer.removeChild(element);
-                fishCounter--;
+                
                 selectedFishNames = updateFishSelection();
                 // Inside the animateFish function, directly use the image source obtained
                 const imgSrc = getRandomFishImage(selectedFishNames);
+                
+                console.log("Add fish: " + fishCounter)
+               // Calculate the difference between fishCounter and maxFishLimit
+                const difference = maxFishLimit - fishCounter;
+                
+                // Call addFish the corresponding number of times
+                for (let i = 0; i < difference; i++) {
+                  addFish(imgSrc);
+                }
 
-                addFish(imgSrc);
+                fishCounter--; // Adjust the fishCounter
 
               }, respawnDelay);
             }
@@ -395,7 +393,6 @@ export const floatingFish = [...transformedFishArray];
   
     function getRandomFishImage(selectedFishNames) {
       // Check if there are selected fish names
-      console.log("HERE ARE THE SELECTED FISH: " + selectedFishNames)
       if (selectedFishNames.length > 0) {
           // Get a random fish name from the selected array
           const randomFishName = selectedFishNames[Math.floor(Math.random() * selectedFishNames.length)];
@@ -446,7 +443,19 @@ export const floatingFish = [...transformedFishArray];
           selectedFishArraysEmpty = true;
         }
     });
+    // Add an event listener to the fishLimitSlider
+    const fishLimitSlider = document.getElementById('fishLimitSlider');
+    const fishLimitValue = document.getElementById('fishLimitValue');
 
+    fishLimitSlider.addEventListener('input', function () {
+      // Update the maxFishLimit when the slider value changes
+      maxFishLimit = parseInt(this.value);
+      fishLimitValue.textContent = maxFishLimit;
+      // This sort of works, but addFishManually is still going left.
+      addFishManually(selectedFishNames, transformedFishArray);
+    });
+    
+    
     function initialFish() {
       transformedFishArray.forEach(fish => {
         const fishName = Object.keys(fish)[0]; // Get the fish name
