@@ -121,6 +121,8 @@ export const floatingFish = [...transformedFishArray];
           if (fishCounter < maxFishLimit) {
             console.log("fishCounter" + fishCounter);
             console.log("maxLimite" + maxFishLimit)
+            const randomDelay = Math.floor(Math.random() * 15) * 1000;
+            await new Promise(resolve => setTimeout(resolve, randomDelay)); 
             const randomFishImageIndex = Math.floor(Math.random() * 2);
             await addFish(images[randomFishImageIndex]);
           } else {
@@ -268,7 +270,7 @@ export const floatingFish = [...transformedFishArray];
           element.classList.add('fish-moving');
   
           const delayBeforeFloat = Math.random() * 2000;
-          const delayBeforeMove = Math.random() * 3000;
+          const delayBeforeMove = Math.random() * 500;
           const respawnDelay = Math.random() * 5000;
   
           const aquariumWidthFactor = aquariumWidth / 500; // Adjust this factor based on your preference
