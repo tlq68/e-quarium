@@ -135,32 +135,33 @@ export const floatingFish = [...transformedFishArray];
     }
   
     function addFish(images) {
-            
       if (images && fishCounter < maxFishLimit) {
-        
-        const fish = document.createElement('div');
-        fish.className = 'fish';
-        fishContainer.appendChild(fish);
+          const fish = document.createElement('div');
+          fish.className = 'fish';
+          fishContainer.appendChild(fish);
   
-        const img = document.createElement('img');
-        // img.src = imgSrc; testing
-        img.src = images
-        img.alt = 'Fish';
-        img.className = 'fish';
-        img.classList.add('fish-moving');
+          const img = document.createElement('img');
+          img.src = images;
+          img.alt = 'Fish';
+          img.className = 'fish';
+          img.classList.add('fish-moving');
   
-        // Determine the movement direction based on the filename
-        const movementDirection = images.endsWith('flip.gif') ? 'right' : 'left';
-        fish.dataset.movementDirection = movementDirection;
+          // Determine the movement direction based on the filename
+          const movementDirection = images.endsWith('flip.gif') ? 'right' : 'left';
+          fish.dataset.movementDirection = movementDirection;
   
-        fish.appendChild(img);
-
-        moveFishRandomly(fish);
+          fish.appendChild(img);
+          
+          // Set a random z-index between 1 and 10
+          const randomIndex = Math.floor(Math.random() * 10) + 1;
+          fish.style.zIndex = randomIndex;
   
-        fishCounter++;
-
+          moveFishRandomly(fish);
+  
+          fishCounter++;
       }
-    }
+  }
+  
   
     function addBottomGlidingFishManually() {
       for (const imgSrc of bottomGlidingFish) {

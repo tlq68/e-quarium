@@ -29,6 +29,7 @@ body {
     overflow: hidden;
     margin: 0;
     padding: 0;
+    z-index: 0;
 }
 
 .fish {
@@ -37,9 +38,6 @@ body {
     height: auto;
     background-size: cover;
     opacity: 1;
-
-    /* Apply the SVG filter to the fish */
-    filter: url(#customFilter);
 }
 
 .bottom-gliding-fish {
@@ -90,6 +88,7 @@ body {
     height: auto;
     bottom: 0;
     margin: 0;
+    z-index: 5;
 }
 
 .castle img {
