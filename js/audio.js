@@ -1,19 +1,23 @@
-// Toggles music sound
 document.addEventListener("DOMContentLoaded", function () {
-    var audio = document.getElementById("backgroundAudio");
-    var toggleAudioButton = document.getElementById("toggleAudioButton");
+    const audio = document.getElementById("backgroundAudio");
+    const audioSources = [
+        "assets/audio/Fish3.m4a",
+        "assets/audio/Fish2.m4a",
+        "assets/audio/Fish1.m4a"
+    ];
+    let currentSourceIndex = 0;
 
-    toggleAudioButton.addEventListener("click", function () {
-        if (audio.paused) {
-            audio.play();
-        } else {
-            audio.pause();
-        }
-    });
-});
+    // Function to play the next audio file
+    function playNextAudio() {
+        currentSourceIndex = (currentSourceIndex + 1) % audioSources.length;
+        audio.src = audioSources[currentSourceIndex];
+        audio.play();
+    }
 
-// Sets audio volume
-document.addEventListener('DOMContentLoaded', function () {
-    const audio = document.getElementById('backgroundAudio');
-    audio.volume = 0.2; // Set the volume to 30%
+    // Play the first audio file initially
+    audio.src = audioSources[currentSourceIndex];
+    audio.play();
+
+    // Event listener to play the next audio file when the current one ends
+    audio.addEventListener("ended", playNextAudio);
 });

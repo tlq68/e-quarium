@@ -36,6 +36,10 @@
     display: none; /* Hide the default checkbox */
 }
 
+#toggle-audio-button {
+    color: pink;
+}
+
 label {
     display: flex;
     flex-direction: column;
