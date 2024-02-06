@@ -1,6 +1,6 @@
 /* dropdown.css */
 
-input#hamburger-icon {
+.hamburger-icon {
     display: none;
 }
 
@@ -89,6 +89,10 @@ label img {
         background-color: #333;
         padding: 10px;
         box-sizing: border-box;
+    }
+
+    #hamburger-icon-label, input#hamburger-icon {
+        display: none;
     }
 
     /* Style for the hamburger icon */
