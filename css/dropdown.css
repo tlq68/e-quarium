@@ -45,13 +45,7 @@ label {
     margin: 5px; /* Adjust the margin as needed */
 }
 
-label:hover {
-    border-color: #aaa; /* Change border color on hover */
-}
 
-.fish-checkbox:checked + label {
-    border-color: #00f; /* Change border color when checkbox is checked */
-}
 
 label img {
     width: 30px; /* Adjust the width of the fish image */
@@ -60,14 +54,15 @@ label img {
     border: 2px solid transparent; /* Add a border to the image */
 }
 
-.fish-checkbox:checked + label img {
-    border-color: #4CAF50; /* Change the border color when checked */
-}
-
 /* Add a class for selected border */
 .selected-border {
-    border-color: #00f; /* Change the border color when checked */
+    border-color: rgb(71, 71, 218); /* Change the border color when checked */
 }
+
+.selected-border:hover {
+    border-color: rgb(19, 167, 204);
+}
+
 .selected-border label {
     border-color: #4CAF50; /* Change the border color when checked */
 }
@@ -123,19 +118,9 @@ label img {
         margin: 5px;
     }
 
-    #hamburger-icon-label:hover {
-        border-color: #aaa;
-    }
+   
 
-    /* Change border color when hamburger icon is checked */
-    #hamburger-icon:checked ~ #hamburger-icon-label {
-        border-color: #00f;
-    }
-
-    /* Change border color of the image when hamburger icon is checked */
-    #hamburger-icon:checked ~ #hamburger-icon-label img {
-        border-color: #4CAF50;
-    }
+    
 
     /* Styling for the hamburger icon image */
     #hamburger-icon-label img {
@@ -145,10 +130,7 @@ label img {
         border: 2px solid transparent;
     }
 
-    /* Change the border color of the image on hover when hamburger icon is checked */
-    #hamburger-icon:checked ~ #hamburger-icon-label:hover img {
-        border-color: #4CAF50;
-    }
+    
 
     
 }
