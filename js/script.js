@@ -300,8 +300,7 @@ export const floatingFish = [...transformedFishArray];
                 fishContainer.removeChild(element);
                 
                 selectedFishNames = updateFishSelection();
-                // Inside the animateFish function, directly use the image source obtained
-                const imgSrc = getRandomFishImage(selectedFishNames);
+                
                 
                 console.log("Add fish: " + fishCounter)
                // Calculate the difference between fishCounter and maxFishLimit
@@ -309,6 +308,8 @@ export const floatingFish = [...transformedFishArray];
                 
                 // Call addFish the corresponding number of times
                 for (let i = 0; i < difference; i++) {
+                  // Inside the animateFish function, directly use the image source obtained
+                  const imgSrc = getRandomFishImage(selectedFishNames);
                   addFish(imgSrc);
                 }
 
