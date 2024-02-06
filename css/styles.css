@@ -88,7 +88,7 @@ body {
     height: auto;
     bottom: 0;
     margin: 0;
-    z-index: 5;
+    z-index: 3;
 }
 
 .castle img {
@@ -99,6 +99,14 @@ body {
 
 .castle:nth-child(1) {
     left: 10%;
+}
+
+.chest img {
+    width: 100px;
+    height: auto;
+    position: absolute;
+    right: -50%;
+    bottom: -20px;
 }
 
 .kelp {
