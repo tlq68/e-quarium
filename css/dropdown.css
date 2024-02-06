@@ -1,15 +1,17 @@
 /* dropdown.css */
 
 :root {
-    --text-color: rgb(123, 122, 184);
+    --text-color1: #6969dc;
+    --text-color2: #69dcdc;
 }
 
 .hamburger-icon {
     display: none;
 }
 
-.hamburger-icon-label {
-    color: blue;
+.hamburger-icon-label svg line {
+    stroke: #fff; /* Change the stroke color to white */
+    color: red;
 }
 
 #top-bar {
@@ -78,8 +80,9 @@ label img {
 }
 
 .slider-container label {
-    color: var(--text-color);
+    color: var(--text-color2);
 }
+
 /* Radio button selector styles */
 #audio-selection {
     display: flex;
@@ -95,7 +98,7 @@ label img {
 }
 
 #audio-selection label {
-    color: var(--text-color);
+    color: var(--text-color1);
     cursor: pointer;
     padding: 5px 10px;
     border: 2px solid transparent;
@@ -141,7 +144,7 @@ label img {
 #toggle-audio-button svg {
     width: 24px; /* Adjust the size as needed */
     height: 24px;
-    fill: var(--text-color); /* Change the color of the SVG icon */
+    fill: var(--text-color1); /* Change the color of the SVG icon */
     margin: 0 20px 0 0;
 }
 
