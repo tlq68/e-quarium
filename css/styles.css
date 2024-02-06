@@ -34,7 +34,7 @@ body {
 
 .fish {
     position: absolute;
-    width: 129px;
+    width: 100px;
     height: auto;
     background-size: cover;
     opacity: 1;
@@ -163,8 +163,8 @@ body {
         display: none;
     }
 
-    .fish {
-        width: 100px; /* Adjusted fish width for extra small screens */
+    .fish, .bottom-gliding-fish-img {
+        width: 85px; /* Adjusted fish width for extra small screens */
         height: auto;
     }
 
@@ -182,7 +182,12 @@ body {
 /* Mobile */
 @media (min-width: 480px) and (max-width: 767px) {
     .fish {
-        width: 110px;
+        width: 100px;
+        height: auto;
+    }
+
+    .bottom-gliding-fish-img {
+        width: 120px;
         height: auto;
     }
 
@@ -201,8 +206,13 @@ body {
 /* Tablets */
 @media (min-width: 768px) and (max-width: 1023px) {
     .fish {
-        width: 120px; /* Adjust tablet fish width */
+        width: 110px; /* Adjust tablet fish width */
         height: auto; /* Adjust tablet fish height */
+    }
+
+    .bottom-gliding-fish-img {
+        width: 130px;
+        height: auto;
     }
 
     .castle {
@@ -219,8 +229,13 @@ body {
 /* Desktop */
 @media (min-width: 1024px) and (max-width: 1439px) {
     .fish {
-        width: 135px; /* Default desktop fish width */
+        width: 125px; /* Default desktop fish width */
         height: auto; /* Default desktop fish height */
+    }
+
+    .bottom-gliding-fish-img {
+        width: 140px;
+        height: auto;
     }
 
     .castle {
@@ -237,8 +252,13 @@ body {
 /* Larger Screens */
 @media (min-width: 1440px) and (max-width: 1919px) {
     .fish {
-        width: 150px; /* Adjust larger screens fish width */
+        width: 140px; /* Adjust larger screens fish width */
         height: auto; /* Adjust larger screens fish height */
+    }
+
+    .bottom-gliding-fish-img {
+        width: 150px;
+        height: auto;
     }
 
     .castle {
@@ -255,8 +275,13 @@ body {
 /* Extra Large Screens */
 @media (min-width: 1920px) {
     .fish {
-        width: 180px; /* Adjust extra large screens fish width */
+        width: 160px; /* Adjust extra large screens fish width */
         height: auto; /* Adjust extra large screens fish height */
+    }
+
+    .bottom-gliding-fish-img {
+        width: 160px;
+        height: auto;
     }
 
     .castle {
