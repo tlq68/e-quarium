@@ -207,3 +207,17 @@ label img {
     border: 2px solid transparent;
 }
 
+@media screen and (max-width: 768px) {
+    .slider-container label,
+    #audio-selection label {
+        font-size: 0.7rem; /* Adjust the font size for smaller screens */
+    }
+
+    #fishLimitValue {
+        font-size: 0.7rem; /* Adjust the font size for smaller screens */
+    }
+
+    #fishLimitSlider {
+        width: 80%; /* Adjust the width of the slider for smaller screens */
+    }
+}
