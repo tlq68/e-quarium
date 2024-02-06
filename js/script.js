@@ -91,7 +91,7 @@ export const floatingFish = [...transformedFishArray];
     const fishContainer = document.getElementById('fish-container');
     
     let fishCounter = 0;
-    let maxFishLimit = 20;
+    let maxFishLimit = 10;
 
     function updateAquariumDimensions() {
       aquariumWidth = aquarium.clientWidth;
@@ -423,29 +423,22 @@ export const floatingFish = [...transformedFishArray];
     const checkboxesContainer = document.getElementById('checkboxes-container');
     checkboxesContainer.addEventListener('change', async function () {
         // Updates fish to be used
-        let selectedFishNames = updateFishSelection()
-
-        if (!firstFishTriggered) {
-            // Wait for updateFishSelection before proceeding
-            await addFishManually(selectedFishNames, transformedFishArray);
-            addBottomGlidingFishManually();
-            firstFishTriggered = true;
-        }
-
-
+        let selectedFishNames = updateFishSelection();
+      
+        // Wait for updateFishSelection before proceeding
+        addFishManually(selectedFishNames, transformedFishArray);
+        
         // Check if selectedFishNames is empty and if not, call addFishManually and addBottomGlidingFishManually
         if (selectedFishNames.length > 0) {
             if (selectedFishArraysEmpty) {
-              addFishManually(selectedFishNames, transformedFishArray);
-              let bottomGlidingFishImage = bottomGlidingFish[Math.floor(Math.random * bottomGlidingFish.length)];
-              addBottomGlidingFishManually(bottomGlidingFishImage);
-
+              selectedFishArraysEmpty = false; // Reset the flag
             }
-            
-        } else if (selectedFishNames.length <= 0) {
-          selectedFishArraysEmpty = true;
+        } else {
+            fishCounter = maxFishLimit;
+            selectedFishArraysEmpty = true; // Set the flag
         }
     });
+
     // Add an event listener to the fishLimitSlider
     const fishLimitSlider = document.getElementById('fishLimitSlider');
 
@@ -455,7 +448,6 @@ export const floatingFish = [...transformedFishArray];
       // This sort of works, but addFishManually is still going left.
       addFishManually(selectedFishNames, transformedFishArray);
     });
-    
     
     function initialFish() {
       transformedFishArray.forEach(fish => {
