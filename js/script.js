@@ -121,7 +121,8 @@ export const floatingFish = [...transformedFishArray];
           if (fishCounter < maxFishLimit) {
             console.log("fishCounter" + fishCounter);
             console.log("maxLimite" + maxFishLimit)
-            await addFish(images[0]);
+            const randomFishImageIndex = Math.floor(Math.random() * 2);
+            await addFish(images[randomFishImageIndex]);
           } else {
             console.log("Else test addFishManually: " + fishCounter);
             console.log('Maximum fish limit reached. Cannot add more fish.');
