@@ -37,6 +37,9 @@ body {
     height: auto;
     background-size: cover;
     opacity: 1;
+
+    /* Apply the SVG filter to the fish */
+    filter: url(#customFilter);
 }
 
 .bottom-gliding-fish {
