@@ -13,20 +13,18 @@ document.addEventListener("DOMContentLoaded", function () {
         currentSourceIndex = (currentSourceIndex + 1) % audioSources.length;
         audio.src = audioSources[currentSourceIndex];
         audio.play();
-        synchronizeRadioButtons(); // Update the selected radio button
     }
 
     // Play the first audio file initially
     audio.src = audioSources[currentSourceIndex];
     audio.play();
-    synchronizeRadioButtons(); // Update the selected radio button
 
     // Event listener to play the next audio file when the current one ends
     audio.addEventListener("ended", playNextAudio);
 
     // Function to synchronize the radio buttons with the current audio source
     function synchronizeRadioButtons() {
-        const radioButtons = document.querySelectorAll('input[name="audio-option"]');
+        const radioButtons = document.querySelectorAll('input[name="audio"]');
         radioButtons.forEach((radioButton, index) => {
             radioButton.checked = index === currentSourceIndex;
         });
