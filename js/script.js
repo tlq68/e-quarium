@@ -191,7 +191,6 @@ export const floatingFish = [...transformedFishArray];
           crab.dataset.movementDirection = movementDirection;
 
           crab.appendChild(img);
-          fishCounter++;
 
           moveBottomGlidingFish(crab);
         } else {
@@ -375,7 +374,6 @@ export const floatingFish = [...transformedFishArray];
               setTimeout(() => {
                 element.removeEventListener('transitionend', handleTransitionEnd);
                 fishContainer.removeChild(element);
-                fishCounter--;
     
                 let imgSrc = bottomGlidingFish[Math.floor(Math.random() * bottomGlidingFish.length)];
                 console.log("imgSrc" + imgSrc)
