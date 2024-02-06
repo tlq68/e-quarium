@@ -445,12 +445,10 @@ export const floatingFish = [...transformedFishArray];
     });
     // Add an event listener to the fishLimitSlider
     const fishLimitSlider = document.getElementById('fishLimitSlider');
-    const fishLimitValue = document.getElementById('fishLimitValue');
 
     fishLimitSlider.addEventListener('input', function () {
       // Update the maxFishLimit when the slider value changes
       maxFishLimit = parseInt(this.value);
-      fishLimitValue.textContent = maxFishLimit;
       // This sort of works, but addFishManually is still going left.
       addFishManually(selectedFishNames, transformedFishArray);
     });
