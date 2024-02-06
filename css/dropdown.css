@@ -70,7 +70,7 @@ label img {
 /* Add this at the end of your existing CSS */
 
 /* Hamburger menu styles for small screens */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 810px) {
     #checkboxes-container {
         display: none; /* Hide the checkboxes container on small screens */
     }
