@@ -1,7 +1,15 @@
 /* dropdown.css */
 
+:root {
+    --text-color: rgb(123, 122, 184);
+}
+
 .hamburger-icon {
     display: none;
+}
+
+.hamburger-icon-label {
+    color: blue;
 }
 
 #top-bar {
@@ -49,8 +57,6 @@ label {
     margin: 5px; /* Adjust the margin as needed */
 }
 
-
-
 label img {
     width: 30px; /* Adjust the width of the fish image */
     height: auto;
@@ -71,70 +77,130 @@ label img {
     border-color: #4CAF50; /* Change the border color when checked */
 }
 
-/* Add this at the end of your existing CSS */
-
-/* Hamburger menu styles for small screens */
-@media screen and (max-width: 810px) {
-    #checkboxes-container {
-        display: none; /* Hide the checkboxes container on small screens */
-    }
-
-    #checkboxes-container {
-        display: none; /* Hide the checkboxes container on small screens */
-        position: absolute;
-        top: 60px; /* Adjust the top position based on your layout */
-        left: 0;
-        width: 100%;
-        background-color: #333;
-        padding: 10px;
-        box-sizing: border-box;
-    }
-
-    #hamburger-icon-label, input#hamburger-icon {
-        display: none;
-    }
-
-    /* Style for the hamburger icon */
-    #hamburger-icon {
-        cursor: pointer;
-        font-size: 24px;
-        color: #fff;
-    }
-
-    /* Display the dropdown content when the hamburger icon is clicked */
-    #hamburger-icon:checked ~ #checkboxes-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Adjust column size as needed */
-        gap: 10px; /* Adjust the gap between grid items as needed */
-    }
-
-    /* Hide the hamburger icon initially */
-    #hamburger-icon {
-        display: flex;
-    }
-
-    /* Styling for the hamburger icon label */
-    #hamburger-icon-label {
-        display: flex;
-        align-items: center;
-        border: 2px solid transparent;
-        cursor: pointer;
-        margin: 5px;
-    }
-
-   
-
-    
-
-    /* Styling for the hamburger icon image */
-    #hamburger-icon-label img {
-        width: 30px;
-        height: auto;
-        margin-right: 8px;
-        border: 2px solid transparent;
-    }
-
-    
-
-    
+.slider-container label {
+    color: var(--text-color);
 }
+/* Radio button selector styles */
+#audio-selection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(25, 25, 25, 0.2);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#audio-selection input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+#audio-selection label {
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+}
+
+#audio-selection label:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#audio-selection input[type="radio"]:checked + label {
+    border-color: #47ABDA; /* Change the border color when selected */
+}
+
+/* Add these styles to your existing CSS */
+.audio-toggle {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.audio-toggle:focus {
+    outline: none; /* Remove the outline when the button is focused */
+}
+
+.audio-toggle img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Style for the audio icon when audio is muted */
+#audio-icon.muted {
+    content: url('assets/audio-off.svg'); /* Change the icon to indicate muted state */
+}
+
+#toggle-audio-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+#toggle-audio-button svg {
+    width: 24px; /* Adjust the size as needed */
+    height: 24px;
+    fill: var(--text-color); /* Change the color of the SVG icon */
+    margin: 0 20px 0 0;
+}
+
+#toggle-audio-button:hover svg {
+    fill: #cccccc; /* Change the color of the SVG icon on hover */
+}
+
+#checkboxes-container {
+    display: none; /* Hide the checkboxes container on small screens */
+}
+
+#checkboxes-container {
+    display: none; /* Hide the checkboxes container on small screens */
+    position: absolute;
+    top: 60px; /* Adjust the top position based on your layout */
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#hamburger-icon-label, input#hamburger-icon {
+    display: none;
+}
+
+/* Style for the hamburger icon */
+#hamburger-icon {
+    cursor: pointer;
+    font-size: 24px;
+    color: #fff;
+}
+
+/* Display the dropdown content when the hamburger icon is clicked */
+#hamburger-icon:checked ~ #checkboxes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Adjust column size as needed */
+    gap: 10px; /* Adjust the gap between grid items as needed */
+}
+
+/* Hide the hamburger icon initially */
+#hamburger-icon {
+    display: flex;
+}
+
+/* Styling for the hamburger icon label */
+#hamburger-icon-label {
+    display: flex;
+    align-items: center;
+    border: 2px solid transparent;
+    cursor: pointer;
+    margin: 5px;
+}
+
+/* Styling for the hamburger icon image */
+#hamburger-icon-label img {
+    width: 30px;
+    height: auto;
+    margin-right: 8px;
+    border: 2px solid transparent;
+}
+
