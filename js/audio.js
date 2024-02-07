@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const audio = document.getElementById("backgroundAudio");
     const audioSources = [
         "https://github.com/tlq68/e-quarium/raw/main/assets/audio/Fish3.m4a",
-        "assets/audio/Fish2.m4a",
-        "assets/audio/Fish1.m4a"
+        "https://github.com/tlq68/e-quarium/raw/main/assets/audio/Fish2.m4a",
+        "https://github.com/tlq68/e-quarium/raw/main/assets/audio/Fish1.m4a"
     ];
     let currentSourceIndex = 0;
     audio.volume = 0.2;
