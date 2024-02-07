@@ -101,14 +101,6 @@ body {
     left: 10%;
 }
 
-.chest img {
-    width: 100px;
-    height: auto;
-    position: absolute;
-    right: -50%;
-    bottom: -20px;
-}
-
 .kelp {
     position: absolute;
     width: 50px; /* Adjust the width of your kelp */
@@ -157,6 +149,22 @@ body {
     right: 0%;
 }
 
+#chest-container {
+    position: absolute;
+    height: auto;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    z-index: 3;
+}
+
+.chest img {
+    width: 100px;
+    height: auto;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
 /* Media Queries */
 
 /* Extra Small Screens */
