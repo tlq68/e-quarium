@@ -152,14 +152,14 @@ body {
 #chest-container {
     position: absolute;
     height: auto;
-    right: 0;
+    right: 10vw;
     bottom: 0;
     margin: 0;
     z-index: 3;
 }
 
 .chest img {
-    width: 100px;
+    width: 100%;
     height: auto;
     position: absolute;
     right: 0;
@@ -184,7 +184,7 @@ body {
         height: auto;
     }
 
-    .castle {
+    .castle, .chest img {
         width: 150px;
         height: auto;
     }
@@ -207,7 +207,7 @@ body {
         height: auto;
     }
 
-    .castle {
+    .castle, .chest img {
         width: 200px;
         height: auto;
     }
@@ -231,7 +231,7 @@ body {
         height: auto;
     }
 
-    .castle {
+    .castle, .chest img {
         width: 250px; /* Adjust tablet castle width */
         height: auto; /* Adjust tablet castle height */
     }
@@ -254,7 +254,7 @@ body {
         height: auto;
     }
 
-    .castle {
+    .castle, .chest img {
         width: 300px; /* Default desktop castle width */
         height: auto; /* Default desktop castle height */
     }
@@ -277,7 +277,7 @@ body {
         height: auto;
     }
 
-    .castle {
+    .castle, .chest img {
         width: 350px; /* Adjust larger screens castle width */
         height: auto; /* Adjust larger screens castle height */
     }
@@ -300,7 +300,7 @@ body {
         height: auto;
     }
 
-    .castle {
+    .castle, .chest img {
         width: 400px; /* Adjust extra large screens castle width */
         height: auto; /* Adjust extra large screens castle height */
     }
