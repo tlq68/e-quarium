@@ -193,6 +193,7 @@ export const floatingFish = [...transformedFishArray];
           const movementDirection = images.endsWith('flip.gif') ? 'right' : 'left';
           crab.dataset.movementDirection = movementDirection;
 
+          crab.style.zIndex = '4';
           crab.appendChild(img);
 
           moveBottomGlidingFish(crab);
