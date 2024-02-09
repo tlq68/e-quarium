@@ -16,25 +16,24 @@ document.addEventListener('DOMContentLoaded', function () {
     // dropdownContent.style.display = 'none';
 
     // Add the crab manually to the floatingFish array
-    const crabFishObject = {
-        'Crab.gif': [
-            { 'selected': true },
-            { 'images': ['Crab.gif', 'Crab flip.gif'] }
-        ]
-    };
+    // const crabFishObject = {
+    //     'Crab.gif': [
+    //         { 'selected': true },
+    //         { 'images': ['Crab.gif', 'Crab flip.gif'] }
+    //     ]
+    // };
 
-    floatingFish.push(crabFishObject);
+    // floatingFish.push(crabFishObject);
 
     // Loop through the floatingFish array and create checkboxes for each fish
     floatingFish.forEach(function (fishObject) {
-        const fishName = Object.keys(fishObject)[0];
-        const images = fishObject[fishName][1].images;
+        const fish = Object.keys(fishObject)[0];
 
         // Create checkbox for each fish
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.className = 'fish-checkbox';
-        checkbox.value = fishName;
+        checkbox.value = fishObject[fish].name;
         checkbox.checked = true; // Set default state to checked
 
         const label = document.createElement('label');
@@ -42,13 +41,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Create a small image of the fish for the label
         const fishImage = document.createElement('img');
-        fishImage.src = `assets/${fishName}`;
-        fishImage.alt = fishName.replace('.gif', ''); // Alt text without '.gif'
+        fishImage.src = fishObject[fish].url;
+        fishImage.alt = fishObject[fish].name.replace('.gif', ''); // Alt text without '.gif'
         label.appendChild(fishImage);
 
         // Set initial border state
         if (checkbox.checked) {
             label.classList.add('selected-border');
+            console.log('Just checking')
         }
 
         checkboxesContainer.appendChild(label);
