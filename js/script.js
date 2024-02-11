@@ -174,7 +174,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   function addFish(fishObject) {
     if (fishObject && fishCounter < maxFishLimit) {
-      const fish = Object.keys(fishObject)[0];
       const randomFishIndex = Math.floor(Math.random() * 2);
       const fishName = fishObject.images[randomFishIndex];
       console.log(fishName)
@@ -199,7 +198,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       const randomIndex = Math.floor(Math.random() * 10) + 1;
       fishDiv.style.zIndex = randomIndex;
 
-      moveFishRandomly(fishDiv);
+      moveFishRandomly(fishDiv, fishObject);
 
       fishCounter++;
     }
@@ -233,166 +232,116 @@ document.addEventListener('DOMContentLoaded', async function () {
     return { x, y };
   }
 
-  function moveFishRandomly(element) {
+  function moveFishRandomly(element, fishObject) {
+    const aquariumWidth = aquarium.clientWidth;
+    const aquariumHeight = aquarium.clientHeight;
     let isFishStopped = false;
-
-    const minHeightAdjustment = 0.15;
-    const maxHeightAdjustment = 0.85;
-    
-    function getInitialPosition() {
-      const x = (element.dataset.movementDirection === 'left') ? aquariumWidth + element.clientWidth : -element.clientWidth * 2;
-      
-      // Adjust the y-coordinate to ensure the fish stays within the desired vertical bounds
-      const minY = aquariumHeight * minHeightAdjustment; // up from the bottom
-      const maxY = aquariumHeight * maxHeightAdjustment - element.clientHeight; // down from the top
-      const y = Math.random() * (maxY - minY) + minY;
   
+    // Function to get initial position
+    function getInitialPosition(fishObject) {
+      let x, y;
+  
+      // Calculate initial position based on fish type
+      if (fishObject.classes.includes('fish')) {
+        // Floating Fish positions
+        x = (element.dataset.movementDirection === 'left') ? aquariumWidth + element.clientWidth : -element.clientWidth * 2;
+        // Adjust the y-coordinate to ensure the fish stays within the desired vertical bounds
+        const minY = aquariumHeight * 0.15; // up from the bottom
+        const maxY = aquariumHeight * 0.85 - element.clientHeight; // down from the top
+        y = Math.random() * (maxY - minY) + minY;
+      } else if (fishObject.classes.includes('bottom-gliding-fish')) {
+        // Bottom Gliding Fish start at the bottom of the aquarium
+        x = (element.dataset.movementDirection === 'left') ? aquariumWidth + element.clientWidth : -element.clientWidth * 2;
+        y = aquariumHeight - element.clientHeight -100; // Adjusted to start at the bottom
+      }
       return { x, y };
     }
   
-    function getRandomPosition() {
-      const x = Math.random() * (aquariumWidth + element.clientWidth);
+    // Function to get random position
+    function getRandomPosition(fishObject) {
+      let x, y;
   
-      // Adjust the y-coordinate to ensure the fish stays within the desired vertical bounds
-      const minY = aquariumHeight * minHeightAdjustment; // up from the bottom
-      const maxY = aquariumHeight * maxHeightAdjustment - element.clientHeight; // down from the top
-      const y = Math.random() * (maxY - minY) + minY;
-  
+      // Calculate random position based on fish type
+      if (fishObject.classes.includes('fish')) {
+        x = Math.random() * (aquariumWidth + element.clientWidth);
+        // Adjust the y-coordinate to ensure the fish stays within the desired vertical bounds
+        const minY = aquariumHeight * 0.15; // up from the bottom
+        const maxY = aquariumHeight * 0.85 - element.clientHeight; // down from the top
+        y = Math.random() * (maxY - minY) + minY;
+      } else if (fishObject.classes.includes('bottom-gliding-fish')) {
+        x = Math.random() * (aquariumWidth + element.clientWidth);
+        y = aquariumHeight - element.clientHeight; // Adjusted to stay at the bottom
+      }
       return { x, y };
     }
   
-    const initialPosition = getInitialPosition();
+    // Get initial position
+    const initialPosition = getInitialPosition(fishObject);
     element.style.transform = `translate(${initialPosition.x}px, ${initialPosition.y}px)`;
-
+  
     function animateFish() {
+      // Check if fish movement is stopped
       if (!isFishStopped) {
-        const newPosition = getRandomPosition();
+        const newPosition = getRandomPosition(fishObject);
+        const initialPosition = getInitialPosition(fishObject);
         element.classList.add('fish-moving');
-
+  
+        // Set random delays
         const delayBeforeFloat = Math.random() * 2000;
         const delayBeforeMove = Math.random() * 500;
         const respawnDelay = Math.random() * 5000;
-
         const aquariumWidthFactor = aquariumWidth / 500; // Adjust this factor based on your preference
-
-        element.style.animation = `fishFloat ${2 * aquariumWidthFactor}s infinite alternate ${delayBeforeFloat}ms`;
+  
+        // Set animation and transition properties based on fish type
+        if (fishObject.classes.includes('fish')) {
+          element.style.animation = `fishFloat ${2 * aquariumWidthFactor}s infinite alternate ${delayBeforeFloat}ms`;
+        }
         element.style.transition = `transform ${8 * aquariumWidthFactor}s linear ${delayBeforeMove}ms`;
-        const distanceMultiplier = 1.3;
-        const endX = (element.dataset.movementDirection === 'left') ? -element.clientWidth * 2 : aquariumWidth + element.clientWidth;
-        const endY = newPosition.y;
-
+  
+        // Calculate end position
+        const distanceMultiplier = 2;
+        const endX = (element.dataset.movementDirection === 'left') ? -element.clientWidth * distanceMultiplier : aquariumWidth + element.clientWidth;
+        const endY = fishObject.classes.includes('fish') ? newPosition.y : initialPosition.y;
         element.style.transform = `translate(${endX}px, ${endY}px)`;
-
+  
         element.addEventListener('transitionend', function handleTransitionEnd(event) {
           if (event.propertyName === 'transform') {
             element.style.transition = 'none';
-
+  
             // Flip the fish if it reaches the end of the aquarium
-            if (element.dataset.movementDirection === 'left' && endX <= -element.clientWidth * 2) {
+            if (element.dataset.movementDirection === 'left' && endX <= -element.clientWidth * distanceMultiplier) {
               element.dataset.movementDirection = 'right';
             } else if (element.dataset.movementDirection === 'right' && endX >= aquariumWidth + element.clientWidth) {
               element.dataset.movementDirection = 'left';
             }
-
+  
             element.style.transform = `translate(${endX}px, ${endY}px)`;
-
+  
             setTimeout(() => {
               element.removeEventListener('transitionend', handleTransitionEnd);
               fishContainer.removeChild(element);
-              
+  
+              // Update selected fish names and fish counter
               selectedFishNames = updateFishSelection();
-              
-              
-              console.log("Add fish: " + fishCounter)
-              // Calculate the difference between fishCounter and maxFishLimit
               const difference = maxFishLimit - fishCounter;
-              
-              // Call addFish the corresponding number of times
               for (let i = 0; i < difference; i++) {
-                // Inside the animateFish function, directly use the image source obtained
                 const imgSrc = getRandomFish(selectedFishNames);
-                console.log('right before disaster?' + imgSrc)
                 addFish(imgSrc);
               }
-
-              fishCounter--; // Adjust the fishCounter
-
+              fishCounter--;
+  
             }, respawnDelay);
           }
         }, { once: true });
       }
     }
-
+  
+    // Start fish movement animation
     setTimeout(() => {
       animateFish();
     }, Math.random() * 3000);
   }
-
-  function moveBottomGlidingFish(element) {
-    let isFishStopped = false;
   
-    function getInitialPosition() {
-      const x = (element.dataset.movementDirection === 'left') ? aquariumWidth + element.clientWidth : -element.clientWidth * 2;
-      const y = aquariumHeight - element.clientHeight + 20; // Adjusted to start at the bottom
-      return { x, y };
-    }
-  
-    function getRandomPosition() {
-      const x = Math.random() * (aquariumWidth + element.clientWidth);
-      const y = aquariumHeight - element.clientHeight; // Adjusted to stay at the bottom
-      return { x, y };
-    }
-  
-    const initialPosition = getInitialPosition();
-    element.style.transform = `translate(${initialPosition.x}px, ${initialPosition.y}px)`;
-  
-    function animateBottomGlidingFish() {
-      if (!isFishStopped) {
-        const newPosition = getRandomPosition();
-  
-        const delayBeforeMove = Math.random() * 3000;
-        const respawnDelay = Math.random() * 7000;
-  
-        element.style.transition = `transform 8s linear ${delayBeforeMove}ms`;
-  
-        const distanceMultiplier = 1.3;
-        const endX = (element.dataset.movementDirection === 'left') ? -element.clientWidth * 2 : aquariumWidth + element.clientWidth;
-        const endY = initialPosition.y; // Set endY to the initial Y position
-  
-        element.style.transform = `translate(${endX}px, ${endY}px)`;
-  
-        element.addEventListener('transitionend', function handleTransitionEnd(event) {
-          if (event.propertyName === 'transform') {
-            element.style.transition = 'none';
-  
-            // Flip the fish if it reaches the end of the aquarium
-            if (element.dataset.movementDirection === 'left' && endX <= -element.clientWidth * 2) {
-              element.dataset.movementDirection = 'right';
-            } else if (element.dataset.movementDirection === 'right' && endX >= aquariumWidth + element.clientWidth) {
-              element.dataset.movementDirection = 'left';
-            }
-  
-            element.style.transform = `translate(${endX}px, ${endY}px)`;
-  
-            setTimeout(() => {
-              element.removeEventListener('transitionend', handleTransitionEnd);
-              fishContainer.removeChild(element);
-  
-              let imgSrc = bottomGlidingFish[Math.floor(Math.random() * bottomGlidingFish.length)];
-              console.log("imgSrc" + imgSrc)
-              updateFishSelection();
-              // addBottomGlidingFish(imgSrc);
-
-            }, respawnDelay);
-          }
-        }, { once: true });
-      }
-    }
-  
-    setTimeout(() => {
-      animateBottomGlidingFish();
-    }, Math.random() * 3000);
-  }    
 
   function getRandomFish(selectedFishNames) {
     // Check if there are selected fish names

@@ -66,7 +66,8 @@ body {
     width: 110px;
 }
 
-@keyframes fishAnimations {
+/* Remove this soon */
+/* @keyframes fishAnimations {
     0%, 100% {
         transform: translateX(100%) translateY(0);
     }
@@ -77,7 +78,7 @@ body {
 
 .fish-moving {
     animation: fishAnimations 8s infinite;
-}
+} */
 
 .fish-flipped img {
     transform: scaleX(-1);
