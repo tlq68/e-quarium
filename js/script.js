@@ -162,10 +162,15 @@ document.addEventListener('DOMContentLoaded', async function () {
       // Randomly select a fish from the available ones
       selectedFishNames = updateFishSelection();
       const fishObject = getRandomFish(selectedFishNames);
-      const fishName = Object.keys(fishObject);
-      console.log("Is this a fish object?: ")
-      console.log(fishObject)
-  
+      const fishName = fishObject.name;
+      // console.log('We are here')
+      // console.log("Is this a fish object?: ")
+      // console.log(fishObject)
+      console.log("Manual testing: ");
+      console.log(fishName)
+      console.log(selectedFishNames.includes(fishObject))
+      
+      console.log(fishObject.selected)
       if (selectedFishNames.includes(fishObject) && fishObject[fishName].selected) {
         const [fishFileName, flipFishFileName] = [fishObject[fishName].url, fishObject[fishName].flipUrl];
         console.log('HERE IN THE FAST LANE: ' + fishFileName, flipFishFileName)
@@ -187,6 +192,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   function addFish(fishObject) {
+    updateFishSelection();
     if (fishObject && fishCounter < maxFishLimit) {
       const randomFishIndex = Math.floor(Math.random() * 2);
       console.log("Images")
@@ -380,14 +386,14 @@ document.addEventListener('DOMContentLoaded', async function () {
             const randomFishObject = fishObjects[Math.floor(Math.random() * fishObjects.length)];
             const fishName = Object.keys(randomFishObject)[0];
             console.log("Rando: ")
-            console.log(randomFishObject)
+            console.log(randomFishObject[fishName])
+            updateFishSelection();
             return randomFishObject[fishName];
         }
     }
 
     // If no fish is selected or found, return null
     console.log("There are no fish to add")
-    return null;
 }
 
   // Add an event listener to checkboxes to trigger the updateFishSelection function
@@ -428,12 +434,6 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
   
   initialFish();
-
-  // Wait for the initial updateFishSelection before proceeding
-  selectedFishNames = await updateFishSelection();
-
-  // Add regular fish and bottom-gliding fish manually
-  addFishManually(selectedFishNames, transformedFishArray);
 
   // Add Stationary Starfish
   addStationaryStar();
