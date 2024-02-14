@@ -87,32 +87,43 @@ const selectedFishNames = [];
 transformedFishArray.forEach(fishObject => {
   const fishName = Object.keys(fishObject)[0];
   fishObject[fishName].selected = true;
-  selectedFishNames.push(fishName);
+  selectedFishNames.push(fishObject);
 });
-  
+
 // We will likely need to change this when we are finished
 export const floatingFish = [...transformedFishArray];
 
 function updateFishSelection() {
   const selectedBorders = document.querySelectorAll('.selected-border');
 
+  // Reset selectedFishNames
+  selectedFishNames.length = 0;
+
   selectedBorders.forEach(border => {
-      const input = border.querySelector('input');
-      if (input && !selectedFishNames.includes(input.value)) {
-          selectedFishNames.push(input.value);
+    const input = border.querySelector('input');
+    if (input) {
+      const fishName = input.value;
+      const selectedFishObject = transformedFishArray.find(fishObject => Object.keys(fishObject)[0] === fishName);
+      if (selectedFishObject) {
+        selectedFishNames.push(selectedFishObject); // Push the entire fish object, not just the name
       }
+    }
   });
 
   // Update the transformedFishArray based on the selectedFishNames
   transformedFishArray.forEach(fishObject => {
-      const fishName = Object.keys(fishObject)[0];
-      const isSelected = selectedFishNames.includes(fishName);
-      fishObject[fishName].selected = isSelected;
+    const fishName = Object.keys(fishObject)[0];
+    const isSelected = selectedFishNames.some(selectedFishObject => Object.keys(selectedFishObject)[0] === fishName);
+    fishObject[fishName].selected = isSelected;
   });
 
-  return selectedFishNames;
+  console.log("Here are the selected fish: ");
+  console.log(selectedFishNames);
+  return selectedFishNames || transformedFishArray;
 }
 
+
+updateFishSelection();
 
 // transformedFishArray.forEach((fishObject) => {
 //   const fishName = Object.keys(fishObject)[0];
@@ -149,10 +160,13 @@ document.addEventListener('DOMContentLoaded', async function () {
   async function addFishManually(selectedFishNames, fishArray) {
     for (let i = 0; i < maxFishLimit || (maxFishLimit === 0 && i === 0); i++) {
       // Randomly select a fish from the available ones
+      selectedFishNames = updateFishSelection();
       const fishObject = getRandomFish(selectedFishNames);
-      const fishName = Object.keys(fishObject)[0];
+      const fishName = Object.keys(fishObject);
+      console.log("Is this a fish object?: ")
+      console.log(fishObject)
   
-      if (selectedFishNames.includes(fishName) && fishObject[fishName].selected) {
+      if (selectedFishNames.includes(fishObject) && fishObject[fishName].selected) {
         const [fishFileName, flipFishFileName] = [fishObject[fishName].url, fishObject[fishName].flipUrl];
         console.log('HERE IN THE FAST LANE: ' + fishFileName, flipFishFileName)
         // Check if the fishCounter is below the maximum limit
@@ -175,7 +189,10 @@ document.addEventListener('DOMContentLoaded', async function () {
   function addFish(fishObject) {
     if (fishObject && fishCounter < maxFishLimit) {
       const randomFishIndex = Math.floor(Math.random() * 2);
+      console.log("Images")
+
       const fishName = fishObject.images[randomFishIndex];
+
       console.log(fishName)
       const fishDiv = document.createElement('div');
 
@@ -251,6 +268,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         y = Math.random() * (maxY - minY) + minY;
       } else if (fishObject.classes.includes('bottom-gliding-fish')) {
         // Bottom Gliding Fish start at the bottom of the aquarium
+        // -- Change this to be the height of the crab image. 
         x = (element.dataset.movementDirection === 'left') ? aquariumWidth + element.clientWidth : -element.clientWidth * 2;
         y = aquariumHeight - element.clientHeight -100; // Adjusted to start at the bottom
       }
@@ -344,20 +362,29 @@ document.addEventListener('DOMContentLoaded', async function () {
   
 
   function getRandomFish(selectedFishNames) {
+    selectedFishNames = updateFishSelection();
     // Check if there are selected fish names
     if (selectedFishNames.length > 0) {
         const fishObjects = transformedFishArray.filter(fishObject => {
-            const fishName = Object.keys(fishObject)[0];
-            return selectedFishNames.includes(fishName) && fishObject[fishName].selected;
+          const fishName = Object.keys(fishObject)[0]
+          // console.log("Random Check:" + fishName)
+          // console.log(fishObject)
+          // console.log(selectedFishNames)
+          // console.log(selectedFishNames.includes(fishObject))
+          // console.log(fishObject[fishName].selected)
+            return selectedFishNames.includes(fishObject) && fishObject[fishName].selected;
         });
-
+        console.log("Are these random fish objects? :" + fishObjects)
         if (fishObjects.length > 0) {
             // Get a random fish object from the filtered array
             const randomFishObject = fishObjects[Math.floor(Math.random() * fishObjects.length)];
             const fishName = Object.keys(randomFishObject)[0];
+            console.log("Rando: ")
+            console.log(randomFishObject)
             return randomFishObject[fishName];
         }
     }
+
     // If no fish is selected or found, return null
     console.log("There are no fish to add")
     return null;
@@ -387,9 +414,9 @@ document.addEventListener('DOMContentLoaded', async function () {
   const fishLimitSlider = document.getElementById('fishLimitSlider');
 
   fishLimitSlider.addEventListener('input', function () {
+    selectedFishNames = updateFishSelection();
     // Update the maxFishLimit when the slider value changes
     maxFishLimit = parseInt(this.value);
-    // This sort of works, but addFishManually is still going left.
     addFishManually(selectedFishNames, transformedFishArray);
   });
   
