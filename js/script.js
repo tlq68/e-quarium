@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     fishContainer.appendChild(star);
 
     const img = document.createElement('img');
-    img.src = 'assets/Star.gif'; // Replace with the actual path to the Star.gif image
+    img.src = 'https://raw.githubusercontent.com/tlq68/e-quarium/main/assets/Star.gif'; // Replace with the actual path to the Star.gif image
     img.alt = 'Star';
     img.className = 'stationary-star-img';
 
