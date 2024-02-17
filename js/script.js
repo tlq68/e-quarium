@@ -272,7 +272,33 @@ document.addEventListener('DOMContentLoaded', async function () {
         // Bottom Gliding Fish start at the bottom of the aquarium
         // -- Change this to be the height of the crab image. 
         x = (element.dataset.movementDirection === 'left') ? aquariumWidth + element.clientWidth : -element.clientWidth * 2;
-        y = aquariumHeight - element.clientHeight -100; // Adjusted to start at the bottom
+       
+        // Calculate offset based on screen width
+        const screenWidth = window.innerWidth;
+        let imageOffset;
+
+        // Adjust the offset based on the screen width
+        if (screenWidth <= 479) {
+            // Extra Small Screens
+            imageOffset = 75; // Adjust as needed
+        } else if (screenWidth >= 480 && screenWidth <= 767) {
+            // Mobile
+            imageOffset = 105; // Adjust as needed
+        } else if (screenWidth >= 768 && screenWidth <= 1023) {
+            // Tablets
+            imageOffset = 115; // Adjust as needed
+        } else if (screenWidth >= 1024 && screenWidth <= 1439) {
+            // Desktop
+            imageOffset = 125; // Adjust as needed
+        } else if (screenWidth >= 1440 && screenWidth <= 1919) {
+            // Larger Screens
+            imageOffset = 135; // Adjust as needed
+        } else {
+            // Extra Large Screens
+            imageOffset = 140; // Adjust as needed
+        }
+
+        y = aquariumHeight - element.clientHeight - imageOffset; // Adjusted to start at the bottom
       }
       return { x, y };
     }
